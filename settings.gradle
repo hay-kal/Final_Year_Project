@@ -1,0 +1,20 @@
+pluginManagement {
+    repositories {
+        google()
+        mavenCentral()
+        gradlePluginPortal()
+    }
+}
+dependencyResolutionManagement {
+    repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
+    repositories {
+        maven {
+            url 'http://android.aldebaran.com/sdk/maven'
+            allowInsecureProtocol = true
+        }
+        google()
+        mavenCentral()
+    }
+}
+rootProject.name = "Final_Year_Project"
+include ':app'
