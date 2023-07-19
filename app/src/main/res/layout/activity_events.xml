@@ -4,42 +4,43 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
-
-
-    <!-- Feedback Button -->
+    tools:context=".EventsActivity">
 
 
     <ImageView
         android:id="@+id/imageView3"
-        android:layout_width="966dp"
-        android:layout_height="597dp"
+        android:layout_width="977dp"
+        android:layout_height="628dp"
         android:scaleType="centerCrop"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintDimensionRatio="H,3:5"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.466"
         app:layout_constraintStart_toStartOf="parent"
-        app:srcCompat="@drawable/rpbackground" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0"
+        app:srcCompat="@drawable/listofevents" />
 
-    <Button
-        android:id="@+id/eventsbutton"
-        android:layout_width="200dp"
-        android:layout_height="80dp"
+    <ImageButton
+        android:id="@+id/graduationbutton"
+        android:layout_width="438dp"
+        android:layout_height="103dp"
         android:layout_marginTop="150dp"
         android:layout_marginRight="8dp"
         android:onClick="openEventsActivity"
         android:text="Events"
         android:textSize="24sp"
-        app:layout_constraintBottom_toTopOf="@+id/menubutton"
+        app:layout_constraintBottom_toTopOf="@+id/momentumbutton"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintVertical_bias="0.0"
+        app:srcCompat="@drawable/graduation" />
 
-    <Button
-        android:id="@+id/menubutton"
-        android:layout_width="200dp"
-        android:layout_height="80dp"
+    <ImageButton
+        android:id="@+id/momentumbutton"
+        android:layout_width="452dp"
+        android:layout_height="107dp"
         android:layout_marginLeft="8dp"
         android:layout_marginBottom="8dp"
         android:onClick="openFeedbackActivity"
@@ -47,26 +48,27 @@
         android:textSize="24sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.494"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.448" />
+        app:layout_constraintVertical_bias="0.547"
+        app:srcCompat="@drawable/momentum" />
 
-    <Button
-        android:id="@+id/feedbackbutton"
-        android:layout_width="200dp"
-        android:layout_height="80dp"
+    <ImageButton
+        android:id="@+id/reflectionsbutton"
+        android:layout_width="441dp"
+        android:layout_height="129dp"
         android:layout_marginLeft="8dp"
-        android:layout_marginBottom="8dp"
+        android:layout_marginBottom="80dp"
         android:onClick="openFeedbackActivity"
         android:text="Feedback"
         android:textSize="24sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.494"
+        app:layout_constraintHorizontal_bias="0.489"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/menubutton"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintTop_toBottomOf="@id/momentumbutton"
+        app:layout_constraintVertical_bias="1.0"
+        app:srcCompat="@drawable/reflections" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -42,19 +42,18 @@ import com.aldebaran.qi.sdk.design.activity.conversationstatus.SpeechBarDisplayS
 
 import java.nio.ByteBuffer;
 
-public class MainActivity extends RobotActivity implements RobotLifecycleCallbacks {
-
+public class EventsActivity extends RobotActivity implements RobotLifecycleCallbacks {
 
     // Store the Animate action.
     private Animate animate;
     private QiContext qiContext;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
+
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_events);
         // Register the RobotLifecycleCallbacks to this Activity.
         setSpeechBarDisplayStrategy(SpeechBarDisplayStrategy.IMMERSIVE);
         setSpeechBarDisplayPosition(SpeechBarDisplayPosition.BOTTOM);
@@ -70,31 +69,26 @@ public class MainActivity extends RobotActivity implements RobotLifecycleCallbac
         super.onDestroy();
     }
 
-
     @Override
     public void onRobotFocusGained(QiContext qiContext) {
-        Future<TakePicture> takePictureFuture = TakePictureBuilder.with(qiContext).buildAsync();
 
         // Create a new say action.
         Say say = SayBuilder.with(qiContext)
-                .withText("Welcome to Republic Polytechnic, I am Pepper. Say hello or touch the screen to begin.")
+                .withText("Here are the events being hosted today!")
                 .build();
 
-        Say sayWrong = SayBuilder.with(qiContext)
-                .withText("Sorry I was not able to understand what you said, Kindly repeat your command or tap the screen to continue.")
+        Say sayNext = SayBuilder.with(qiContext)
+                .withText("Next Page!")
                 .build();
 
-        Say sayRight = SayBuilder.with(qiContext)
-                .withText("Command Received!")
-                .build();
 
+        Say sayBack= SayBuilder.with(qiContext)
+                .withText("Going back")
+                .build();
 
         say.run();
 
-        // Create the PhraseSet 1.
-        PhraseSet phraseSetHello = PhraseSetBuilder.with(qiContext)
-                .withTexts("Hello")
-                .build();
+
         // Create the PhraseSet 2.
         PhraseSet phraseSetMenu = PhraseSetBuilder.with(qiContext)
                 .withTexts("Menu")
@@ -116,35 +110,42 @@ public class MainActivity extends RobotActivity implements RobotLifecycleCallbac
 
         // Create a new listen action.
         Listen listen = ListenBuilder.with(qiContext)
-                .withPhraseSets(phraseSetEvents, phraseSetHome, phraseSetMenu, phraseSetBack, phraseSetHello)
+                .withPhraseSets(phraseSetEvents, phraseSetHome, phraseSetMenu, phraseSetBack)
                 .build();
-
 
         this.qiContext = qiContext;
 
         while (true) {
             ListenResult listenResult = listen.run();
 
-
             Log.i(TAG, "Heard phrase: " + listenResult.getHeardPhrase().getText());
             // Identify the matched phrase set.
             PhraseSet matchedPhraseSet = listenResult.getMatchedPhraseSet();
-            if (PhraseSetUtil.equals(matchedPhraseSet, phraseSetHello)) {
-                Log.i(TAG, "Heard phrase set: It seems you have LOST an item");
-                sayRight.run();
-                startEvents(MainActivity.this);
-            } else if (PhraseSetUtil.equals(matchedPhraseSet, phraseSetEvents)) {
-                Log.i(TAG, "Heard phrase set: Home Page");
-                sayRight.run();
-                startEvents(MainActivity.this);
-            } else if (PhraseSetUtil.equals(matchedPhraseSet, phraseSetMenu)) {
-                Log.i(TAG, "Heard phrase set: Home Page");
-                sayRight.run();
-                startMenu(MainActivity.this);
+            if (PhraseSetUtil.equals(matchedPhraseSet, phraseSetEvents)) {
+                Log.i(TAG, "Heard phrase set: Events Page");
+                sayNext.run();
+
+                Animation animation = AnimationBuilder.with(qiContext) // Create the builder with the context.
+                        .withResources(R.raw.bowing_b001) // Set the animation resource.
+                        .build(); // Build the animation.
+
+                animate = AnimateBuilder.with(qiContext) // Create the builder with the context.
+                        .withAnimation(animation) // Set the animation.
+                        .build(); // Build the animate action.
+
+                // Run the animate action asynchronously.
+                Future<Void> animateFuture = animate.async().run();
+                startEvents(EventsActivity.this);
             } else if (PhraseSetUtil.equals(matchedPhraseSet, phraseSetHome)) {
                 Log.i(TAG, "Heard phrase set: Home Page");
-                sayRight.run();
-                startHome(MainActivity.this);
+                sayBack.run();
+                startHome(EventsActivity.this);
+            } else if (PhraseSetUtil.equals(matchedPhraseSet, phraseSetMenu)) {
+                Log.i(TAG, "Heard phrase set: Menu Page");
+                sayBack.run();
+                startMenu(EventsActivity.this);
+            } else if (PhraseSetUtil.equals(matchedPhraseSet, phraseSetBack)) {
+                startBackActivity();
             }
         }
     }
@@ -162,6 +163,10 @@ public class MainActivity extends RobotActivity implements RobotLifecycleCallbac
         Intent intent = new Intent(context, EventsActivity.class);
         context.startActivity(intent);
     }
+    private void startBackActivity() {
+        finish();
+    }
+
 
     @Override
     public void onRobotFocusLost() {

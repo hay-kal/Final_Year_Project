@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MenuActivity">
+
+    <ImageView
+        android:id="@+id/imageView3"
+        android:layout_width="966dp"
+        android:layout_height="597dp"
+        android:alpha="0.2"
+
+        android:scaleType="centerCrop"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintDimensionRatio="H,3:5"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:srcCompat="@drawable/background" />
+
+    <Button
+        android:id="@+id/btnQueue"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/rectangular_button"
+        android:text="QUEUE"
+        android:color="#ff6750a4"
+        android:layout_marginRight="40dp"
+        android:layout_marginLeft="40dp"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toTopOf="@+id/btnFAQ"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/btnFAQ"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/rectangular_button"
+        android:layout_marginRight="40dp"
+        android:layout_marginLeft="40dp"
+        android:text="FAQ"
+        android:color="#ff6750a4"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toTopOf="@+id/btnLostAndFound"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnQueue" />
+
+    <Button
+        android:id="@+id/btnLostAndFound"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/rectangular_button"
+        android:layout_marginRight="40dp"
+        android:layout_marginLeft="40dp"
+        android:text="LOST AND FOUND"
+        android:color="#ff6750a4"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toTopOf="@+id/btnGuidance"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnFAQ" />
+
+    <Button
+        android:id="@+id/btnGuidance"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/rectangular_button"
+        android:layout_marginRight="40dp"
+        android:layout_marginLeft="40dp"
+        android:text="GUIDANCE"
+        android:color="#ff6750a4"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toTopOf="@+id/btnEntertainment"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnLostAndFound" />
+
+    <Button
+        android:id="@+id/btnEntertainment"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/rectangular_button"
+        android:layout_marginRight="40dp"
+        android:layout_marginLeft="40dp"
+        android:text="ENTERTAINMENT"
+        android:color="#ff6750a4"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnGuidance" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
