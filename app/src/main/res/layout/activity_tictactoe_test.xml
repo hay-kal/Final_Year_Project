@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp"
+    tools:context=".TicTacToeActivity">
+
+    <TextView
+        android:id="@+id/tv_score"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Score: 0 - 0"
+        android:textSize="18sp"
+        android:layout_gravity="center_horizontal"/>
+
+
+    <GridLayout
+        android:id="@+id/grid_layout"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:columnCount="3"
+        android:rowCount="3">
+
+        <!-- Row 0 -->
+        <Button
+            android:id="@+id/btn00"
+            style="@style/TicTacToeButton" />
+
+        <Button
+            android:id="@+id/btn01"
+            style="@style/TicTacToeButton" />
+
+        <Button
+            android:id="@+id/btn02"
+            style="@style/TicTacToeButton" />
+
+        <!-- Row 1 -->
+        <Button
+            android:id="@+id/btn10"
+            style="@style/TicTacToeButton" />
+
+        <Button
+            android:id="@+id/btn11"
+            style="@style/TicTacToeButton" />
+
+        <Button
+            android:id="@+id/btn12"
+            style="@style/TicTacToeButton" />
+
+        <!-- Row 2 -->
+        <Button
+            android:id="@+id/btn20"
+            style="@style/TicTacToeButton" />
+
+        <Button
+            android:id="@+id/btn21"
+            style="@style/TicTacToeButton" />
+
+        <Button
+            android:id="@+id/btn22"
+            style="@style/TicTacToeButton" />
+
+    </GridLayout>
+
+    <Button
+        android:id="@+id/btn_reset"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Reset Game" />
+
+</LinearLayout>
+

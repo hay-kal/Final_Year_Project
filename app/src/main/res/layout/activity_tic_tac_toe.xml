@@ -1,0 +1,239 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".TicTacToeActivity">
+
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:srcCompat="@drawable/background"
+        android:alpha="0.2"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="0dp" />
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:layout_editor_absoluteX="-16dp"
+        tools:layout_editor_absoluteY="195dp">
+
+
+        <View
+            android:id="@+id/rectangleView2"
+            android:layout_width="198dp"
+            android:layout_height="201dp"
+            android:background="@drawable/rounded_rectangle"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.773"
+            app:layout_constraintStart_toEndOf="@+id/rectangleView"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.188" />
+
+        <View
+            android:id="@+id/rectangleView"
+            android:layout_width="198dp"
+            android:layout_height="201dp"
+            android:alpha="1"
+            android:background="@drawable/rounded_rectangle"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.127"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.188" />
+
+        <ImageView
+            android:id="@+id/imageView9"
+            android:layout_width="170dp"
+            android:layout_height="136dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.139"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.215"
+            app:srcCompat="@drawable/user" />
+
+        <TextView
+            android:id="@+id/titleQueueNum4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Tic Tac Toe"
+            android:textSize="24sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.1" />
+
+        <TextView
+            android:id="@+id/titleQueueNum"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Guest"
+            android:textSize="20sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.187"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.418" />
+
+        <TextView
+            android:id="@+id/titleQueueNum5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Pepper Bot"
+            android:textSize="20sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.826"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.419" />
+
+        <TextView
+            android:id="@+id/titleQueueNum2"
+            android:layout_width="71dp"
+            android:layout_height="86dp"
+            android:text="0"
+            android:textAlignment="center"
+            android:textSize="60sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.406"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.243" />
+
+        <TextView
+            android:id="@+id/titleQueueNum3"
+            android:layout_width="71dp"
+            android:layout_height="86dp"
+            android:text="0"
+            android:textAlignment="center"
+            android:textSize="60sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.593"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.243" />
+
+        <ImageView
+            android:id="@+id/imageView6"
+            android:layout_width="148dp"
+            android:layout_height="62dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="1.0"
+            app:srcCompat="@drawable/imgbin_nanyang_polytechnic_republic_polytechnic_school_education_diploma_png" />
+
+        <ImageView
+            android:id="@+id/imageView11"
+            android:layout_width="206dp"
+            android:layout_height="150dp"
+            app:layout_constraintBottom_toBottomOf="@+id/rectangleView2"
+            app:layout_constraintEnd_toEndOf="@+id/rectangleView2"
+            app:layout_constraintHorizontal_bias="0.272"
+            app:layout_constraintStart_toStartOf="@+id/rectangleView2"
+            app:layout_constraintTop_toTopOf="@+id/rectangleView2"
+            app:layout_constraintVertical_bias="0.357"
+            app:srcCompat="@drawable/dumpy_copy" />
+
+        <GridLayout
+            android:id="@+id/grid_layout"
+            android:layout_width="329dp"
+            android:layout_height="348dp"
+            android:layout_weight="1"
+            android:columnCount="3"
+            android:rowCount="3"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="1.0">
+
+            <!-- Row 0 -->
+            <Button
+                android:id="@+id/btn00"
+                style="@style/TicTacToeButton"
+                android:layout_width="110dp"
+                android:layout_height="110dp" />
+
+            <Button
+                android:id="@+id/btn01"
+                style="@style/TicTacToeButton"
+                android:layout_width="110dp"
+                android:layout_height="110dp" />
+
+            <Button
+                android:id="@+id/btn02"
+                style="@style/TicTacToeButton"
+                android:layout_width="110dp"
+                android:layout_height="110dp" />
+
+            <!-- Row 1 -->
+            <Button
+                android:id="@+id/btn10"
+                style="@style/TicTacToeButton"
+                android:layout_width="110dp"
+                android:layout_height="110dp" />
+
+            <Button
+                android:id="@+id/btn11"
+                style="@style/TicTacToeButton"
+                android:layout_width="110dp"
+                android:layout_height="110dp" />
+
+            <Button
+                android:id="@+id/btn12"
+                style="@style/TicTacToeButton"
+                android:layout_width="110dp"
+                android:layout_height="110dp" />
+
+            <!-- Row 2 -->
+            <Button
+                android:id="@+id/btn20"
+                style="@style/TicTacToeButton"
+                android:layout_width="110dp"
+                android:layout_height="110dp" />
+
+            <Button
+                android:id="@+id/btn21"
+                style="@style/TicTacToeButton"
+                android:layout_width="110dp"
+                android:layout_height="110dp" />
+
+            <Button
+                android:id="@+id/btn22"
+                style="@style/TicTacToeButton"
+                android:layout_width="110dp"
+                android:layout_height="110dp" />
+
+        </GridLayout>
+
+        <ImageView
+            android:id="@+id/imageView10"
+            android:layout_width="87dp"
+            android:layout_height="87dp"
+            app:layout_constraintBottom_toBottomOf="@+id/grid_layout"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.243"
+            app:srcCompat="@drawable/vs" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

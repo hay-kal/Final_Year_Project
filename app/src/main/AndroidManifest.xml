@@ -15,10 +15,49 @@
         android:theme="@style/Theme.Final_Year_Project"
         tools:targetApi="31">
         <activity
+            android:name=".guidance"
+            android:exported="false" />
+        <activity
+            android:name=".TicTacToeActivity"
+            android:exported="false" />
+        <activity
+            android:name=".QueueDisplay"
+            android:exported="false" />
+        <activity
+            android:name=".QueueSelect"
+            android:exported="false" />
+        <activity
+            android:name=".WelcomeActivity"
+            android:exported="false" />
+        <activity
+            android:name=".rpsTest"
+            android:exported="false" />
+        <activity
             android:name=".EventsActivity"
             android:exported="false" />
         <activity
             android:name=".MenuActivity"
+            android:exported="false" />
+        <activity
+            android:name=".FoundItemPicture"
+            android:exported="false" />
+        <activity
+            android:name=".ViewItemImage"
+            android:exported="false" />
+        <activity
+            android:name=".FoundItemDesc"
+            android:exported="false" />
+        <activity
+            android:name=".Lost"
+            android:exported="false" />
+        <activity
+            android:name=".Queue"
+            android:exported="false" />
+        <activity
+            android:name=".RestoreItemList"
+            android:exported="false" />
+        <activity
+            android:name=".LostnFoundMain"
             android:exported="false" />
         <activity
             android:name=".MainActivity"

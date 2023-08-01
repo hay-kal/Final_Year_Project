@@ -10,7 +10,9 @@ import android.hardware.camera2.CameraDevice;
 import android.hardware.camera2.CameraManager;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 
 import com.aldebaran.qi.Future;
@@ -61,6 +63,15 @@ public class MainActivity extends RobotActivity implements RobotLifecycleCallbac
 
         QiSDK.register(this, this);
 
+        ImageButton imageView3 = findViewById(R.id.imageView3);
+        imageView3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // Perform the action to open the other page here
+                // For example, start a new activity using an Intent
+                startWelcome(MainActivity.this);
+            }
+        });
     }
 
     @Override
@@ -73,11 +84,10 @@ public class MainActivity extends RobotActivity implements RobotLifecycleCallbac
 
     @Override
     public void onRobotFocusGained(QiContext qiContext) {
-        Future<TakePicture> takePictureFuture = TakePictureBuilder.with(qiContext).buildAsync();
 
         // Create a new say action.
         Say say = SayBuilder.with(qiContext)
-                .withText("Welcome to Republic Polytechnic, I am Pepper. Say hello or touch the screen to begin.")
+                .withText("Welcome to Republic Polytechnic, I am Pepper and today I will be your guide! Say keywords such as menu, events or guidance to jump directly to the page! You can also say Hello or Touch the screen to continue!")
                 .build();
 
         Say sayWrong = SayBuilder.with(qiContext)
@@ -91,27 +101,84 @@ public class MainActivity extends RobotActivity implements RobotLifecycleCallbac
 
         say.run();
 
-        // Create the PhraseSet 1.
+        // Create the PhraseSet for "Hello"
         PhraseSet phraseSetHello = PhraseSetBuilder.with(qiContext)
                 .withTexts("Hello")
                 .build();
-        // Create the PhraseSet 2.
-        PhraseSet phraseSetMenu = PhraseSetBuilder.with(qiContext)
-                .withTexts("Menu")
-                .build();
 
-        // Create the PhraseSet 2.
-        PhraseSet phraseSetEvents = PhraseSetBuilder.with(qiContext)
-                .withTexts("Events")
-                .build();
-
+        // Create the PhraseSet for "Home"
         PhraseSet phraseSetHome = PhraseSetBuilder.with(qiContext)
                 .withTexts("Home")
                 .build();
 
-        // Create the PhraseSet 2.
+        // Create the PhraseSet for "Menu"
+        PhraseSet phraseSetMenu = PhraseSetBuilder.with(qiContext)
+                .withTexts("Menu")
+                .build();
+
+        // Create the PhraseSet for "Events"
+        PhraseSet phraseSetEvents = PhraseSetBuilder.with(qiContext)
+                .withTexts("Events")
+                .build();
+
+        // Create the PhraseSet for "Back"
         PhraseSet phraseSetBack = PhraseSetBuilder.with(qiContext)
                 .withTexts("back", "previous")
+                .build();
+
+        // Create the PhraseSet for "Lost"
+        PhraseSet phraseSetLost = PhraseSetBuilder.with(qiContext)
+                .withTexts("Lost")
+                .build();
+
+        // Create the PhraseSet for "Found"
+        PhraseSet phraseSetFound = PhraseSetBuilder.with(qiContext)
+                .withTexts("Found")
+                .build();
+
+        // Create the PhraseSet for "Games", "Tic-Tac-Toe", "Rock-Paper-Scissors"
+        PhraseSet phraseSetGames = PhraseSetBuilder.with(qiContext)
+                .withTexts("Games", "Tic-Tac-Toe", "Rock-Paper-Scissors")
+                .build();
+
+        // Create the PhraseSet for "Quiz"
+        PhraseSet phraseSetQuiz = PhraseSetBuilder.with(qiContext)
+                .withTexts("Quiz")
+                .build();
+
+        // Create the PhraseSet for "FAQ", "Frequently Asked Question", "I have a question", "Question"
+        PhraseSet phraseSetFAQ = PhraseSetBuilder.with(qiContext)
+                .withTexts("FAQ", "Frequently Asked Question", "I have a question", "Question")
+                .build();
+
+        // Create the PhraseSet for "Queue"
+        PhraseSet phraseSetQueue = PhraseSetBuilder.with(qiContext)
+                .withTexts("Queue")
+                .build();
+
+        // Create the PhraseSet for "Financial Assistance", "Finance", "Money Related", "FAS", "Bursary"
+        PhraseSet phraseSetFinancialAssistance = PhraseSetBuilder.with(qiContext)
+                .withTexts("Financial Assistance", "Finance", "Money Related", "FAS", "Bursary")
+                .build();
+
+        // Create the PhraseSet for "Scholarship and Awards", "Awards", "Scholarship"
+        PhraseSet phraseSetScholarshipAwards = PhraseSetBuilder.with(qiContext)
+                .withTexts("Scholarship and Awards", "Awards", "Scholarship")
+                .build();
+
+        // Create the PhraseSet for "Student Care", "Counselling", "Mentoring", "Student Insurance", "Special Education Needs"
+        PhraseSet phraseSetStudentCare = PhraseSetBuilder.with(qiContext)
+                .withTexts("Student Care", "Counselling", "Mentoring", "Student Insurance", "Special Education Needs")
+                .build();
+
+        // Create the PhraseSet for "IT Enhanced Learning Experience", "IT", "Helpdesk"
+        PhraseSet phraseSetITEnhancedLearning = PhraseSetBuilder.with(qiContext)
+                .withTexts("IT Enhanced Learning Experience", "IT", "Helpdesk")
+                .build();
+
+        // Create the PhraseSet for "International Students"
+        PhraseSet phraseSetInternationalStudents = PhraseSetBuilder.with(qiContext)
+                .withTexts("International Students")
                 .build();
 
         // Create a new listen action.
@@ -161,6 +228,15 @@ public class MainActivity extends RobotActivity implements RobotLifecycleCallbac
     private void startEvents(Context context) {
         Intent intent = new Intent(context, EventsActivity.class);
         context.startActivity(intent);
+    }
+
+    private void startWelcome(Context context) {
+        Intent intent = new Intent(context, WelcomeActivity.class);
+        context.startActivity(intent);
+    }
+
+    private void back() {
+        finish();
     }
 
     @Override

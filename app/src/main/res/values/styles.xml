@@ -1,0 +1,10 @@
+<resources>
+    <!-- Other styles here -->
+
+    <style name="TicTacToeButton" parent="Widget.AppCompat.Button">
+        <item name="android:textSize">18sp</item>
+        <item name="android:textColor">#000000</item>
+        <item name="android:background">#FFFFFF</item>
+        <!-- Add more style attributes here as needed -->
+    </style>
+</resources>

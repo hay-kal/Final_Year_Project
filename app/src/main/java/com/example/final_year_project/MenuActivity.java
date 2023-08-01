@@ -10,6 +10,7 @@ import android.hardware.camera2.CameraDevice;
 import android.hardware.camera2.CameraManager;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 
@@ -43,23 +44,80 @@ import com.aldebaran.qi.sdk.design.activity.conversationstatus.SpeechBarDisplayS
 import java.nio.ByteBuffer;
 
 public class MenuActivity extends RobotActivity implements RobotLifecycleCallbacks {
+
+    Button btnBack, btnHome, btnQueue, btnFAQ, btnLostAndFound, btnGuidance, btnEntertainment;
     // Store the Animate action.
     private Animate animate;
     private QiContext qiContext;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
-
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu);
-        // Register the RobotLifecycleCallbacks to this Activity.
         setSpeechBarDisplayStrategy(SpeechBarDisplayStrategy.IMMERSIVE);
         setSpeechBarDisplayPosition(SpeechBarDisplayPosition.BOTTOM);
-
         QiSDK.register(this, this);
 
+        btnBack = findViewById(R.id.btnBack);
+        btnHome = findViewById(R.id.btnHome);
+        btnQueue = findViewById(R.id.btnQueue);
+        btnFAQ = findViewById(R.id.btnFAQ);
+        btnLostAndFound = findViewById(R.id.btnLostAndFound);
+        btnGuidance = findViewById(R.id.btnGuidance);
+        btnEntertainment = findViewById(R.id.btnEntertainment);
+
+        // Set the click listeners for each button
+        btnBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startBackActivity();
+            }
+        });
+
+
+        btnHome.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startMenu(MenuActivity.this);
+            }
+        });
+
+        btnQueue.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startBackActivity();
+            }
+        });
+
+        btnFAQ.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startBackActivity();
+            }
+        });
+
+        btnLostAndFound.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startLnFActivity(MenuActivity.this);
+            }
+        });
+
+        btnGuidance.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startGuidanceActivity(MenuActivity.this);
+            }
+        });
+
+        btnEntertainment.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startTTT(MenuActivity.this);
+            }
+        });
     }
+
 
     @Override
     protected void onDestroy() {
@@ -162,6 +220,7 @@ public class MenuActivity extends RobotActivity implements RobotLifecycleCallbac
         Intent intent = new Intent(context, MenuActivity.class);
         context.startActivity(intent);
     }
+
     private void startHome(Context context){
         Intent intent = new Intent(context, MainActivity.class);
         context.startActivity(intent);
@@ -169,6 +228,25 @@ public class MenuActivity extends RobotActivity implements RobotLifecycleCallbac
 
     private void startEvents(Context context){
         Intent intent = new Intent(context, EventsActivity.class);
+        context.startActivity(intent);
+    }
+
+    private void startRPS(Context context){
+        Intent intent = new Intent(context, MainActivity.class);
+        context.startActivity(intent);
+    }
+    private void startTTT(Context context){
+        Intent intent = new Intent(context, TicTacToeActivity.class);
+        context.startActivity(intent);
+    }
+
+    private void startLnFActivity(Context context){
+        Intent intent = new Intent(context, LostnFoundMain.class);
+        context.startActivity(intent);
+    }
+
+    private void startGuidanceActivity(Context context){
+        Intent intent = new Intent(context, guidance.class);
         context.startActivity(intent);
     }
     private void startBackActivity() {
