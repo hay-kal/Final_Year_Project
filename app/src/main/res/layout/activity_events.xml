@@ -9,6 +9,7 @@
 
     <ImageView
         android:id="@+id/imageView3"
+        android:clickable="false"
         android:layout_width="977dp"
         android:layout_height="628dp"
         android:scaleType="centerCrop"
@@ -18,9 +19,43 @@
         app:layout_constraintHorizontal_bias="0.466"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0"
+        app:layout_constraintVertical_bias="0.888"
         app:srcCompat="@drawable/listofevents" />
 
+    <ImageView
+        android:id="@+id/ivBack"
+        android:layout_width="82dp"
+        android:layout_height="60dp"
+        android:adjustViewBounds="true"
+        android:clickable="true"
+        android:onClick="goBack"
+        android:text="Back"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintDimensionRatio="H,1:3"
+        app:layout_constraintEnd_toEndOf="@+id/imageView3"
+        app:layout_constraintHorizontal_bias="0.062"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.036"
+        app:srcCompat="@drawable/back"></ImageView>
+
+    <ImageView
+        android:id="@+id/ivHome"
+        android:layout_width="82dp"
+        android:layout_height="60dp"
+        android:clickable="true"
+        android:contentDescription="Home Button"
+        android:onClick="goToHome"
+        android:text="Home"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/imageView3"
+        app:layout_constraintHorizontal_bias="0.155"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.036"
+        app:srcCompat="@drawable/home"></ImageView>
 
     <View
         android:id="@+id/rectangleView"
@@ -36,7 +71,7 @@
         app:layout_constraintVertical_bias="0.642" />
 
     <ImageButton
-        android:id="@+id/graduationbutton"
+        android:id="@+id/ibGrad"
         android:layout_width="438dp"
         android:layout_height="103dp"
         android:onClick="openEventsActivity"
@@ -51,7 +86,7 @@
         app:srcCompat="@drawable/graduation" />
 
     <ImageButton
-        android:id="@+id/momentumbutton"
+        android:id="@+id/ibMomentum"
         android:layout_width="452dp"
         android:layout_height="107dp"
         android:onClick="openFeedbackActivity"
@@ -66,7 +101,7 @@
         app:srcCompat="@drawable/momentum" />
 
     <ImageButton
-        android:id="@+id/reflectionsbutton"
+        android:id="@+id/ibReflections"
         android:layout_width="441dp"
         android:layout_height="129dp"
         android:onClick="openFeedbackActivity"

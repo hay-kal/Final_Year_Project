@@ -4,27 +4,30 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".LostnFoundMain">
+    tools:context=".LostAndFoundActivity">
 
         <ImageView
             android:id="@+id/imageView2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:alpha="0.5"
-            app:srcCompat="@drawable/web_1920__1"
-            tools:ignore="MissingConstraints"
-            tools:layout_editor_absoluteX="141dp"
-            tools:layout_editor_absoluteY="-116dp" />
-
-        <View
-            android:id="@+id/rectangleView"
-            android:layout_width="640dp"
-            android:layout_height="320dp"
-            android:layout_marginTop="16dp"
-            android:background="#82BF45"
-            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/titleItem" />
+            app:srcCompat="@drawable/web_1920__1"
+            tools:ignore="MissingConstraints" />
+
+        <ImageView
+            android:id="@+id/ivBack"
+            android:layout_width="651dp"
+            android:layout_height="370dp"
+            android:alpha="0.5"
+            app:layout_constraintBottom_toBottomOf="@+id/imageView2"
+            app:layout_constraintEnd_toEndOf="@+id/imageView2"
+            app:layout_constraintHorizontal_bias="0.501"
+            app:layout_constraintStart_toStartOf="@+id/imageView2"
+            app:layout_constraintTop_toBottomOf="@+id/titleItem"
+            app:layout_constraintVertical_bias="0.102"
+            app:srcCompat="@drawable/opaque_rounded_rectangle" />
 
         <TextView
             android:id="@+id/titleItem"
@@ -37,20 +40,6 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <ImageView
-            android:id="@+id/imageViewPic"
-            android:layout_width="161dp"
-            android:layout_height="494dp"
-            android:layout_marginTop="24dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.072"
-            app:srcCompat="@drawable/ellipse"
-            tools:ignore="MissingConstraints" />
-
         <TextView
             android:id="@+id/titlePic"
             android:layout_width="wrap_content"
@@ -61,22 +50,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.279"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/rectangleView"
-            app:layout_constraintVertical_bias="0.357"
-            tools:ignore="MissingConstraints" />
-
-        <ImageView
-            android:id="@+id/imageTakePic"
-            android:layout_width="57dp"
-            android:layout_height="92dp"
-            android:layout_marginBottom="40dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.177"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/imageViewPic"
-            app:layout_constraintVertical_bias="1.0"
-            app:srcCompat="@drawable/ellipse"
+            app:layout_constraintTop_toBottomOf="@+id/ivBack"
             tools:ignore="MissingConstraints" />
 
         <EditText
@@ -87,12 +61,12 @@
             android:hint="item"
             android:inputType="text"
             android:minHeight="48dp"
-            app:layout_constraintBottom_toBottomOf="@+id/rectangleView"
-            app:layout_constraintEnd_toEndOf="@+id/rectangleView"
-            app:layout_constraintHorizontal_bias="0.065"
-            app:layout_constraintStart_toStartOf="@+id/rectangleView"
-            app:layout_constraintTop_toTopOf="@+id/rectangleView"
-            app:layout_constraintVertical_bias="0.128"
+            app:layout_constraintBottom_toBottomOf="@+id/ivBack"
+            app:layout_constraintEnd_toEndOf="@+id/ivBack"
+            app:layout_constraintHorizontal_bias="0.077"
+            app:layout_constraintStart_toStartOf="@+id/ivBack"
+            app:layout_constraintTop_toTopOf="@+id/ivBack"
+            app:layout_constraintVertical_bias="0.204"
             tools:ignore="MissingConstraints" />
 
         <EditText
@@ -101,15 +75,15 @@
             android:layout_height="wrap_content"
             android:ems="10"
 
+            android:hint="Colour"
             android:inputType="text"
             android:minHeight="48dp"
-            android:hint="Colour"
-            app:layout_constraintBottom_toBottomOf="@+id/rectangleView"
-            app:layout_constraintEnd_toEndOf="@+id/rectangleView"
-            app:layout_constraintHorizontal_bias="0.065"
-            app:layout_constraintStart_toStartOf="@+id/rectangleView"
-            app:layout_constraintTop_toTopOf="@+id/rectangleView"
-            app:layout_constraintVertical_bias="0.404"
+            app:layout_constraintBottom_toTopOf="@+id/editTextChar"
+            app:layout_constraintEnd_toEndOf="@+id/ivBack"
+            app:layout_constraintHorizontal_bias="0.077"
+            app:layout_constraintStart_toStartOf="@+id/ivBack"
+            app:layout_constraintTop_toBottomOf="@+id/editTextItem"
+            app:layout_constraintVertical_bias="0.49"
             tools:ignore="MissingConstraints" />
 
         <EditText
@@ -117,15 +91,15 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:ems="10"
+            android:hint="Item Characteristics"
             android:inputType="text"
             android:minHeight="48dp"
-            android:hint="Item Characteristics"
-            app:layout_constraintBottom_toBottomOf="@+id/rectangleView"
-            app:layout_constraintEnd_toEndOf="@+id/rectangleView"
-            app:layout_constraintHorizontal_bias="0.065"
-            app:layout_constraintStart_toStartOf="@+id/rectangleView"
-            app:layout_constraintTop_toTopOf="@+id/rectangleView"
-            app:layout_constraintVertical_bias="0.661"
+            app:layout_constraintBottom_toBottomOf="@+id/ivBack"
+            app:layout_constraintEnd_toEndOf="@+id/ivBack"
+            app:layout_constraintHorizontal_bias="0.077"
+            app:layout_constraintStart_toStartOf="@+id/ivBack"
+            app:layout_constraintTop_toTopOf="@+id/ivBack"
+            app:layout_constraintVertical_bias="0.677"
             tools:ignore="MissingConstraints" />
 
         <Button
@@ -133,21 +107,60 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Next"
-            app:layout_constraintBottom_toBottomOf="@+id/rectangleView"
-            app:layout_constraintEnd_toEndOf="@+id/rectangleView"
-            app:layout_constraintStart_toStartOf="@+id/rectangleView"
-            app:layout_constraintTop_toTopOf="@+id/rectangleView"
-            app:layout_constraintVertical_bias="0.952"
+            app:layout_constraintBottom_toBottomOf="@+id/ivBack"
+            app:layout_constraintEnd_toEndOf="@+id/ivBack"
+            app:layout_constraintStart_toStartOf="@+id/ivBack"
+            app:layout_constraintTop_toTopOf="@+id/ivBack"
+            app:layout_constraintVertical_bias="0.891"
             tools:ignore="MissingConstraints" />
 
         <ImageView
             android:id="@+id/back"
+            android:layout_width="82dp"
+            android:layout_height="60dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/ivBack"
+            app:layout_constraintHorizontal_bias="0.63"
+            app:layout_constraintStart_toStartOf="@+id/imageView2"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.029"
+            app:srcCompat="@drawable/back" />
+
+        <ImageView
+            android:id="@+id/imageView24"
+            android:layout_width="82dp"
+            android:layout_height="60dp"
+            app:layout_constraintBottom_toTopOf="@+id/ivBack"
+            app:layout_constraintEnd_toStartOf="@+id/titleItem"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toEndOf="@+id/back"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.216"
+            app:srcCompat="@drawable/home" />
+
+        <ImageView
+            android:id="@+id/imageTakePic"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:srcCompat="?attr/actionModeCloseDrawable"
-            tools:ignore="MissingConstraints"
-            tools:layout_editor_absoluteX="16dp"
-            tools:layout_editor_absoluteY="16dp" />
+            app:layout_constraintBottom_toBottomOf="@+id/imageView2"
+            app:layout_constraintEnd_toStartOf="@+id/titlePic"
+            app:layout_constraintHorizontal_bias="0.833"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/ivBack"
+            app:layout_constraintVertical_bias="0.438"
+            app:srcCompat="@drawable/camera" />
+
+        <ImageView
+            android:id="@+id/imageView27"
+            android:layout_width="148dp"
+            android:layout_height="62dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.987"
+            app:srcCompat="@drawable/imgbin_nanyang_polytechnic_republic_polytechnic_school_education_diploma_png" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 

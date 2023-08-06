@@ -1,7 +1,5 @@
 package com.example.final_year_project;
 
-import android.content.ContentResolver;
-import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -10,9 +8,7 @@ import android.graphics.BitmapFactory;
 import android.hardware.camera2.CameraDevice;
 import android.hardware.camera2.CameraManager;
 import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
-import android.provider.MediaStore;
 import android.util.Log;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -20,8 +16,8 @@ import android.widget.ImageView;
 import androidx.annotation.NonNull;
 
 import com.aldebaran.qi.Future;
-import com.aldebaran.qi.sdk.QiContext;
 import com.aldebaran.qi.sdk.QiSDK;
+import com.aldebaran.qi.sdk.QiContext;
 import com.aldebaran.qi.sdk.RobotLifecycleCallbacks;
 import com.aldebaran.qi.sdk.builder.AnimateBuilder;
 import com.aldebaran.qi.sdk.builder.AnimationBuilder;
@@ -45,6 +41,12 @@ import com.aldebaran.qi.sdk.object.image.EncodedImage;
 import com.aldebaran.qi.sdk.object.image.EncodedImageHandle;
 import com.aldebaran.qi.sdk.object.image.TimestampedImageHandle;
 import com.aldebaran.qi.sdk.util.PhraseSetUtil;
+
+import android.content.ContentResolver;
+import android.content.ContentValues;
+import android.os.Build;
+import android.provider.MediaStore;
+
 
 import java.io.IOException;
 import java.io.OutputStream;
@@ -70,6 +72,8 @@ public class FoundItemPicture extends RobotActivity implements RobotLifecycleCal
     private QiContext qiContext;
     // TimestampedImage future.
     private Future<TimestampedImageHandle> timestampedImageHandleFuture;
+
+    Future<TakePicture> takePictureFuture;
 
     Button TakePic;
 
@@ -107,18 +111,10 @@ public class FoundItemPicture extends RobotActivity implements RobotLifecycleCal
 //            @Override
 //            public void onClick(View v) {
 //
-////                // Build the action.
-////                EnforceTabletReachability enforceTabletReachability = EnforceTabletReachabilityBuilder.with(qiContext).build();
-////
-////                // If needed, subscribe to the positionReached() signal
-////                // in order to know when the tablet has reached its final position.
-////                enforceTabletReachability.addOnPositionReachedListener(() -> Log.i(TAG, "On position reached"));
-////
-////                // Run the action asynchronously
-////                Future<Void> enforceTabletReachabilityFuture = enforceTabletReachability.async().run();
-//
 //                takePicture();
-//                timestampedImageHandleFuture.andThenConsume(timestampedImageHandle -> { //does not run
+//                timestampedImageHandleFuture.andThenConsume(timestampedImageHandle ->
+//
+//                { //does not run
 //
 //                    // Consume take picture action when it's ready
 //                    Log.i(TAG, "Picture taken");
@@ -139,13 +135,16 @@ public class FoundItemPicture extends RobotActivity implements RobotLifecycleCal
 //                    Log.i(TAG, "PICTURE RECEIVED! (" + pictureBufferSize + " Bytes)");
 //                    // display picture
 //                    Bitmap pictureBitmap = BitmapFactory.decodeByteArray(pictureArray, 0, pictureBufferSize);
+//                    saveImageToFile(FoundItemPicture.this, pictureBitmap, "FoundItem");
 //                    runOnUiThread(() -> pictureView.setImageBitmap(pictureBitmap));
 //
-//                    // Save the picture to storage
 //
 //                });
+//
+//
 //            }
 //        });
+
     }
 
     @Override
@@ -341,7 +340,7 @@ public class FoundItemPicture extends RobotActivity implements RobotLifecycleCal
 
 
     private void startBackActivity(byte[] pic) {
-        Intent intent = new Intent(FoundItemPicture.this, FoundItemDesc.class);
+        Intent intent = new Intent(FoundItemPicture.this, FoundItemFormActivity.class);
         intent.putExtra("PICTURE_ARRAY", pic);
         Log.i(TAG, "Image Intenting " + Arrays.toString(pic));
         startActivity(intent);

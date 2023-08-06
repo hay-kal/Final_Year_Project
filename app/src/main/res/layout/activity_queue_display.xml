@@ -4,14 +4,15 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".QueueDisplay">
+    tools:context=".QueueDisplayActivity">
 
     <ImageView
         android:id="@+id/imageView2"
+        android:clickable="false"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:srcCompat="@drawable/background"
-        android:alpha="0.5"
+        android:alpha="0.4"
         tools:ignore="MissingConstraints"
         tools:layout_editor_absoluteX="0dp"
         tools:layout_editor_absoluteY="0dp" />
@@ -22,18 +23,6 @@
         android:layout_height="match_parent"
         tools:layout_editor_absoluteX="-33dp"
         tools:layout_editor_absoluteY="155dp">
-
-        <View
-            android:id="@+id/rectangleView"
-            android:layout_width="640dp"
-            android:layout_height="320dp"
-            android:layout_marginTop="44dp"
-            android:background="#82BF45"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/titleQueueNum"
-            app:layout_constraintVertical_bias="0.079" />
 
         <TextView
             android:id="@+id/titleQueueNum"
@@ -55,8 +44,8 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/rectangleView"
-            app:layout_constraintVertical_bias="0.506"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.971"
             tools:ignore="MissingConstraints" />
 
         <TextView
@@ -66,10 +55,10 @@
             android:text=""
             android:textAlignment="center"
             android:textSize="56sp"
-            app:layout_constraintBottom_toBottomOf="@+id/rectangleView"
-            app:layout_constraintEnd_toEndOf="@+id/rectangleView"
-            app:layout_constraintStart_toStartOf="@+id/rectangleView"
-            app:layout_constraintTop_toTopOf="@+id/rectangleView" />
+            app:layout_constraintBottom_toBottomOf="@+id/imageView25"
+            app:layout_constraintEnd_toEndOf="@+id/imageView25"
+            app:layout_constraintStart_toStartOf="@+id/imageView25"
+            app:layout_constraintTop_toTopOf="@+id/imageView25" />
 
         <ImageView
             android:id="@+id/imageView6"
@@ -81,7 +70,19 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="1.0"
+            android:clickable="false"
             app:srcCompat="@drawable/imgbin_nanyang_polytechnic_republic_polytechnic_school_education_diploma_png" />
+
+        <ImageView
+            android:id="@+id/imageView25"
+            android:layout_width="644dp"
+            android:layout_height="318dp"
+            android:alpha="0.4"
+            app:layout_constraintBottom_toTopOf="@+id/titleReminder"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/titleQueueNum"
+            app:srcCompat="@drawable/opaque_rounded_rectangle" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

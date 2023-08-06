@@ -4,10 +4,6 @@ import static android.content.ContentValues.TAG;
 
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.hardware.camera2.CameraDevice;
-import android.hardware.camera2.CameraManager;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -23,30 +19,24 @@ import com.aldebaran.qi.sdk.builder.AnimationBuilder;
 import com.aldebaran.qi.sdk.builder.ListenBuilder;
 import com.aldebaran.qi.sdk.builder.PhraseSetBuilder;
 import com.aldebaran.qi.sdk.builder.SayBuilder;
-import com.aldebaran.qi.sdk.builder.TakePictureBuilder;
 import com.aldebaran.qi.sdk.design.activity.RobotActivity;
 import com.aldebaran.qi.sdk.design.activity.conversationstatus.SpeechBarDisplayPosition;
 import com.aldebaran.qi.sdk.design.activity.conversationstatus.SpeechBarDisplayStrategy;
 import com.aldebaran.qi.sdk.object.actuation.Animate;
 import com.aldebaran.qi.sdk.object.actuation.Animation;
-import com.aldebaran.qi.sdk.object.camera.TakePicture;
 import com.aldebaran.qi.sdk.object.conversation.Listen;
 import com.aldebaran.qi.sdk.object.conversation.ListenResult;
 import com.aldebaran.qi.sdk.object.conversation.PhraseSet;
 import com.aldebaran.qi.sdk.object.conversation.Say;
-import com.aldebaran.qi.sdk.object.image.EncodedImage;
-import com.aldebaran.qi.sdk.object.image.EncodedImageHandle;
-import com.aldebaran.qi.sdk.object.image.TimestampedImageHandle;
 import com.aldebaran.qi.sdk.util.PhraseSetUtil;
-import com.aldebaran.qi.sdk.design.activity.conversationstatus.SpeechBarDisplayPosition;
-import com.aldebaran.qi.sdk.design.activity.conversationstatus.SpeechBarDisplayStrategy;
-
-import java.nio.ByteBuffer;
 
 public class MenuActivity extends RobotActivity implements RobotLifecycleCallbacks {
 
-    Button btnBack, btnHome, btnQueue, btnFAQ, btnLostAndFound, btnGuidance, btnEntertainment;
-    // Store the Animate action.
+    Button btnFAQ, btnLostAndFound, btnGuidance, btnEntertainment;
+
+    ImageView ivBack, ivFeedback;
+//    // Store the Animate action.
+
     private Animate animate;
     private QiContext qiContext;
 
@@ -58,41 +48,35 @@ public class MenuActivity extends RobotActivity implements RobotLifecycleCallbac
         setSpeechBarDisplayPosition(SpeechBarDisplayPosition.BOTTOM);
         QiSDK.register(this, this);
 
-        btnBack = findViewById(R.id.btnBack);
-        btnHome = findViewById(R.id.btnHome);
-        btnQueue = findViewById(R.id.btnQueue);
+        ivBack = findViewById(R.id.ivBack);
+        ivFeedback = findViewById(R.id.ivFeedback);
         btnFAQ = findViewById(R.id.btnFAQ);
         btnLostAndFound = findViewById(R.id.btnLostAndFound);
         btnGuidance = findViewById(R.id.btnGuidance);
         btnEntertainment = findViewById(R.id.btnEntertainment);
 
-        // Set the click listeners for each button
-        btnBack.setOnClickListener(new View.OnClickListener() {
+        ivBack.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
-                startBackActivity();
+            public void onClick(View view) {
+                // For example, start a new activity using an Intent
+                // To be replaced with startEvents after testing
+                back();
             }
         });
 
-
-        btnHome.setOnClickListener(new View.OnClickListener() {
+        ivFeedback.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
-                startMenu(MenuActivity.this);
-            }
-        });
-
-        btnQueue.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startBackActivity();
+            public void onClick(View view) {
+                // For example, start a new activity using an Intent
+                // To be replaced with startEvents after testing
+                startFeedbackActivity(MenuActivity.this);
             }
         });
 
         btnFAQ.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startBackActivity();
+                startFAQActivity(MenuActivity.this);
             }
         });
 
@@ -113,7 +97,7 @@ public class MenuActivity extends RobotActivity implements RobotLifecycleCallbac
         btnEntertainment.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startTTT(MenuActivity.this);
+                startEntertainmentActivity(MenuActivity.this);
             }
         });
     }
@@ -131,25 +115,19 @@ public class MenuActivity extends RobotActivity implements RobotLifecycleCallbac
 
         // Create a new say action.
         Say say = SayBuilder.with(qiContext)
-                .withText("Let's record it's information, additionally, you can take a picture of the item")
+                .withText("Welcome to the Menu, Here you can select from the buttons below to interact with a certain module! If you are unsure of what to pick and need help with a specific topic, Say it out loud so I can refer you to the FAQ section or the front desk.")
                 .build();
 
         Say sayNext = SayBuilder.with(qiContext)
                 .withText("Next Page!")
                 .build();
 
-        Say sayPic = SayBuilder.with(qiContext)
-                .withText("Hold up the item clearly in front of me!")
-                .build();
 
         Say sayBack = SayBuilder.with(qiContext)
                 .withText("Going back")
                 .build();
 
 
-        Say sayBuggin = SayBuilder.with(qiContext)
-                .withText("success")
-                .build();
 
         say.run();
 
@@ -209,47 +187,63 @@ public class MenuActivity extends RobotActivity implements RobotLifecycleCallbac
                 sayBack.run();
                 startMenu(MenuActivity.this);
             } else if (PhraseSetUtil.equals(matchedPhraseSet, phraseSetBack)) {
-                startBackActivity();
+                back();
             }
         }
 
 
     }
 
-    private void startMenu(Context context){
+    // Method to start the MenuActivity
+    private void startMenu(Context context) {
         Intent intent = new Intent(context, MenuActivity.class);
         context.startActivity(intent);
     }
 
-    private void startHome(Context context){
+    // Method to start the MainActivity (Home)
+    private void startHome(Context context) {
         Intent intent = new Intent(context, MainActivity.class);
         context.startActivity(intent);
     }
 
-    private void startEvents(Context context){
+    // Method to start the EventsActivity
+    private void startEvents(Context context) {
         Intent intent = new Intent(context, EventsActivity.class);
         context.startActivity(intent);
     }
 
-    private void startRPS(Context context){
-        Intent intent = new Intent(context, MainActivity.class);
-        context.startActivity(intent);
-    }
-    private void startTTT(Context context){
-        Intent intent = new Intent(context, TicTacToeActivity.class);
+    // Method to start the EntertainmentActivity
+    private void startEntertainmentActivity(Context context) {
+        Intent intent = new Intent(context, EntertainmentActivity.class);
         context.startActivity(intent);
     }
 
+    // Method to start the FAQsMenuActivity
+    private void startFAQActivity(Context context){
+        Intent intent = new Intent(context, FAQsMenuActivity.class);
+        context.startActivity(intent);
+    }
+
+    // Method to start the Lost and Found Activity
     private void startLnFActivity(Context context){
-        Intent intent = new Intent(context, LostnFoundMain.class);
+        Intent intent = new Intent(context, LostAndFoundActivity.class);
         context.startActivity(intent);
     }
 
+    // Method to start the Guidance Activity
     private void startGuidanceActivity(Context context){
-        Intent intent = new Intent(context, guidance.class);
+        Intent intent = new Intent(context, GuidanceActivity.class);
         context.startActivity(intent);
     }
-    private void startBackActivity() {
+
+    // Method to start the Feedback Activity
+    private void startFeedbackActivity(Context context){
+        Intent intent = new Intent(context, FeedbackActivity.class);
+        context.startActivity(intent);
+    }
+
+    // Method to finish the current activity and go back to the previous one
+    private void back() {
         finish();
     }
 

@@ -1,3 +1,23 @@
 <resources>
     <string name="app_name">Final_Year_Project</string>
+    <string name="SNA">Discover Your Full Potential
+        At Republic Polytechnic (RP), we recognise students with outstanding academic results, leadership qualities and diverse talents. Through our wide range of scholarships and awards, talented students are recognised and encouraged to achieve greater heights!
+        As an RP student, you can look forward to a host of scholarships and awards, offered in partnership with our sponsors.</string>
+    <string name="FA">RP has various schemes in place to assist students who are unable to afford a polytechnic education.
+        At RP, we believe in ensuring that all our students are given equal opportunities to participate in activities that enrich their educational experience.
+        Students who need financial assistance can refer to the various schemes below or chat with our FAS Eligibility Chatbot for RP administered schemes.</string>
+    <string name="SC">Student Care\n
+        There are various categories pertaining to Student Care:\n
+        - Counselling\n
+        - Mentoring\n
+        - Student Insurance\n
+        - Special Educational Needs</string>
+    <string name="IS">Welcome, International Students!
+        As an international student at RP, you will gain knowledge and skills that can lead to exciting careers and further studies opportunities. You will also get to make new friends and experience new cultures.</string>
+    <string name="IT">IT Enhanced Learning Experience
+        Republic Polytechnic (RP) believes in using Information Technology (IT) to enrich and support the learning experience of all our students.</string>
+    <string name="scan">Scan to Find Out More!</string>
+    <string name="GRAD">This is the Graduation Event description</string>
+    <string name="MOMNT">This is the Momentum Event description</string>
+    <string name="RF">This is the Reflections Event description</string>
 </resources>

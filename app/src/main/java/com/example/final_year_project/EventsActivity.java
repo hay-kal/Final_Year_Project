@@ -10,7 +10,9 @@ import android.hardware.camera2.CameraDevice;
 import android.hardware.camera2.CameraManager;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 
 import com.aldebaran.qi.Future;
@@ -44,6 +46,9 @@ import java.nio.ByteBuffer;
 
 public class EventsActivity extends RobotActivity implements RobotLifecycleCallbacks {
 
+    ImageView ivBack, ivHome;
+    ImageButton ibGrad, ibMomentum, ibReflections;
+
     // Store the Animate action.
     private Animate animate;
     private QiContext qiContext;
@@ -60,6 +65,61 @@ public class EventsActivity extends RobotActivity implements RobotLifecycleCallb
 
         QiSDK.register(this, this);
 
+        ibGrad = findViewById(R.id.ibGrad);
+        ibMomentum = findViewById(R.id.ibMomentum);
+        ibReflections = findViewById(R.id.ibReflections);
+        ivBack = findViewById(R.id.ivBack);
+        ivHome = findViewById(R.id.ivHome);
+
+        ivBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // For example, start a new activity using an Intent
+                // To be replaced with startEvents after testing
+                startBackActivity();
+            }
+        });
+
+        ivHome.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startMenu(EventsActivity.this);
+            }
+        });
+
+        ibGrad.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // For example, start a new activity using an Intent
+                // To be replaced with startEvents after testing
+                startInfoActivity("GRAD");
+            }
+        });
+
+        ibMomentum.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // For example, start a new activity using an Intent
+                // To be replaced with startEvents after testing
+                startInfoActivity("MOMNT");
+            }
+        });
+
+        ibReflections.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // For example, start a new activity using an Intent
+                // To be replaced with startEvents after testing
+                startInfoActivity("RF");
+            }
+        });
+
+    }
+
+    public void startInfoActivity (String event) {
+        Intent intent = new Intent(EventsActivity.this, EventsInfoActivity.class);
+        intent.putExtra("event", event);
+        startActivity(intent);
     }
 
     @Override
@@ -108,9 +168,9 @@ public class EventsActivity extends RobotActivity implements RobotLifecycleCallb
                 .withTexts("back", "previous")
                 .build();
 
-        // Create the PhraseSet for "Lost"
+        // Create the PhraseSet for "ItemListActivity"
         PhraseSet phraseSetLost = PhraseSetBuilder.with(qiContext)
-                .withTexts("Lost")
+                .withTexts("ItemListActivity")
                 .build();
 
         // Create the PhraseSet for "Found"
@@ -190,7 +250,7 @@ public class EventsActivity extends RobotActivity implements RobotLifecycleCallb
 
                 // Run the animate action asynchronously.
                 Future<Void> animateFuture = animate.async().run();
-                startEvents(EventsActivity.this);
+
             } else if (PhraseSetUtil.equals(matchedPhraseSet, phraseSetHome)) {
                 Log.i(TAG, "Heard phrase set: Home Page");
                 sayBack.run();
@@ -214,10 +274,7 @@ public class EventsActivity extends RobotActivity implements RobotLifecycleCallb
         context.startActivity(intent);
     }
 
-    private void startEvents(Context context) {
-        Intent intent = new Intent(context, EventsActivity.class);
-        context.startActivity(intent);
-    }
+
     private void startBackActivity() {
         finish();
     }

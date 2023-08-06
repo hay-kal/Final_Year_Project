@@ -77,7 +77,7 @@ public class ViewItemImage extends RobotActivity implements RobotLifecycleCallba
         }
         // Initialize pictureView
         pictureView = findViewById(R.id.picture_view);
-        Back = findViewById(R.id.btnBack);
+        Back = findViewById(R.id.ivBack);
         Log.i(TAG, "Initialized pictureView");
 
         // Register the RobotLifecycleCallbacks to this Activity.
@@ -202,7 +202,7 @@ public class ViewItemImage extends RobotActivity implements RobotLifecycleCallba
 
 
     private void startBackActivity() {
-        Intent intent = new Intent(ViewItemImage.this, Lost.class);
+        Intent intent = new Intent(ViewItemImage.this, ItemListActivity.class);
         startActivity(intent);
     }
 

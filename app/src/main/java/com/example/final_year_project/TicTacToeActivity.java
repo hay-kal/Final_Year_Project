@@ -1,26 +1,32 @@
 package com.example.final_year_project;
 
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
-import androidx.appcompat.app.AppCompatActivity;
 
 import com.aldebaran.qi.sdk.QiContext;
 import com.aldebaran.qi.sdk.RobotLifecycleCallbacks;
 import com.aldebaran.qi.sdk.design.activity.RobotActivity;
+import com.aldebaran.qi.sdk.design.activity.conversationstatus.SpeechBarDisplayPosition;
+import com.aldebaran.qi.sdk.design.activity.conversationstatus.SpeechBarDisplayStrategy;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
-public class TicTacToeActivity extends RobotActivity implements RobotLifecycleCallbacks,View.OnClickListener {
+
+public class TicTacToeActivity extends RobotActivity implements RobotLifecycleCallbacks, View.OnClickListener {
+
+    TextView tvHumanScore, tvCompScore;
+    ImageView ivBack, ivHome;
 
     private int playerXScore = 0;
     private int playerOScore = 0;
-
-    private TextView tvScore;
 
     private Button[][] buttons = new Button[3][3];
     private boolean playerTurn = true;
@@ -30,7 +36,29 @@ public class TicTacToeActivity extends RobotActivity implements RobotLifecycleCa
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tic_tac_toe);
-        tvScore = findViewById(R.id.titleQueueNum3);
+        setSpeechBarDisplayStrategy(SpeechBarDisplayStrategy.IMMERSIVE);
+        setSpeechBarDisplayPosition(SpeechBarDisplayPosition.BOTTOM);
+
+        tvHumanScore = findViewById(R.id.tvHumanScore);
+        tvCompScore = findViewById(R.id.tvCompScore);
+        ivBack = findViewById(R.id.ivBack);
+        ivHome = findViewById(R.id.ivHome);
+
+        ivBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // For example, start a new activity using an Intent
+                // To be replaced with startEvents after testing
+                startBackActivity();
+            }
+        });
+
+        ivHome.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startMenu(TicTacToeActivity.this);
+            }
+        });
 
         // Initialize the 2D array to hold the buttons
         for (int i = 0; i < 3; i++) {
@@ -73,7 +101,7 @@ public class TicTacToeActivity extends RobotActivity implements RobotLifecycleCa
         if (checkForWin(boardToState(), "O")) {
             showToast("Player O wins!");
             playerOScore++;
-            tvScore.setText("Score: " + playerXScore + " - " + playerOScore);
+            tvCompScore.setText(String.valueOf(playerOScore));
             disableButtons();
             resetGame();
         } else if (moveCount == 9) {
@@ -212,7 +240,8 @@ public class TicTacToeActivity extends RobotActivity implements RobotLifecycleCa
                 moveCount = 0;
 
                 // Update the score TextView
-                tvScore.setText("Score: " + playerXScore + " - " + playerOScore);
+                tvHumanScore.setText(String.valueOf(playerXScore));
+                tvCompScore.setText(String.valueOf(playerOScore));
             }
         }, 1500); // Adjust the delay time (in milliseconds) as needed
     }
@@ -230,7 +259,7 @@ public class TicTacToeActivity extends RobotActivity implements RobotLifecycleCa
             // Check for win after the player's move
             if (checkForWin(boardToState(), "X")) {
                 playerXScore++;
-                tvScore.setText("Score: " + playerXScore + " - " + playerOScore);
+                tvHumanScore.setText(String.valueOf(playerXScore));
                 showToast("Player X wins!");
                 disableButtons();
                 resetGame();
@@ -258,6 +287,58 @@ public class TicTacToeActivity extends RobotActivity implements RobotLifecycleCa
         }
     }
 
+    private void startMenu(Context context){
+        Intent intent = new Intent(context, MenuActivity.class);
+        context.startActivity(intent);
+    }
+
+    private void startHome(Context context){
+        Intent intent = new Intent(context, MainActivity.class);
+        context.startActivity(intent);
+    }
+
+    private void startEvents(Context context){
+        Intent intent = new Intent(context, EventsActivity.class);
+        context.startActivity(intent);
+    }
+
+    private void startRPS(Context context){
+        Intent intent = new Intent(context, MainActivity.class);
+        context.startActivity(intent);
+    }
+
+    private void startFeedback(Context context){
+        Intent intent = new Intent(context, FeedbackActivity.class);
+        context.startActivity(intent);
+    }
+    private void startTTT(Context context){
+        Intent intent = new Intent(context, TicTacToeActivity.class);
+        context.startActivity(intent);
+    }
+
+    private void startEntertainmentActivity(Context context){
+        Intent intent = new Intent(context, EntertainmentActivity.class);
+        context.startActivity(intent);
+    }
+
+    private void startLnFActivity(Context context){
+        Intent intent = new Intent(context, LostAndFoundActivity.class);
+        context.startActivity(intent);
+    }
+
+    private void startGuidanceActivity(Context context){
+        Intent intent = new Intent(context, GuidanceActivity.class);
+        context.startActivity(intent);
+    }
+
+    private void startFAQActivity(Context context){
+        Intent intent = new Intent(context, FAQsMenuActivity.class);
+        context.startActivity(intent);
+    }
+
+    private void startBackActivity() {
+        finish();
+    }
 
     @Override
     public void onRobotFocusGained(QiContext qiContext) {
