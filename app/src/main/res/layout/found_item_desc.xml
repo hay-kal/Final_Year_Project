@@ -107,6 +107,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Next"
+            android:backgroundTint="#851798"
+            android:color="#ff6750a4"
             app:layout_constraintBottom_toBottomOf="@+id/ivBack"
             app:layout_constraintEnd_toEndOf="@+id/ivBack"
             app:layout_constraintStart_toStartOf="@+id/ivBack"

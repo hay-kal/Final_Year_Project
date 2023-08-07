@@ -4,10 +4,13 @@ import static android.content.ContentValues.TAG;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.aldebaran.qi.sdk.QiContext;
@@ -16,6 +19,8 @@ import com.aldebaran.qi.sdk.builder.ListenBuilder;
 import com.aldebaran.qi.sdk.builder.PhraseSetBuilder;
 import com.aldebaran.qi.sdk.builder.SayBuilder;
 import com.aldebaran.qi.sdk.design.activity.RobotActivity;
+import com.aldebaran.qi.sdk.design.activity.conversationstatus.SpeechBarDisplayPosition;
+import com.aldebaran.qi.sdk.design.activity.conversationstatus.SpeechBarDisplayStrategy;
 import com.aldebaran.qi.sdk.object.conversation.Listen;
 import com.aldebaran.qi.sdk.object.conversation.ListenResult;
 import com.aldebaran.qi.sdk.object.conversation.PhraseSet;
@@ -31,17 +36,22 @@ public class QueueDisplayActivity extends RobotActivity implements RobotLifecycl
 
     TextView textView;
 
+    ImageView ivHome;
     String newNumber;
     Map<String, List<String>> categoryNumberMap;
     SharedPreferences sharedPreferences;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_queue_display);
+        setSpeechBarDisplayStrategy(SpeechBarDisplayStrategy.IMMERSIVE);
+        setSpeechBarDisplayPosition(SpeechBarDisplayPosition.BOTTOM);
 
         textView = findViewById(R.id.tvQueue);
         sharedPreferences = getSharedPreferences("MyPrefs", MODE_PRIVATE);
+        ivHome = findViewById(R.id.ivHome);
 
         // Initialize the category and numbers mapping
         categoryNumberMap = new HashMap<>();
@@ -51,6 +61,13 @@ public class QueueDisplayActivity extends RobotActivity implements RobotLifecycl
         categoryNumberMap.put("IT", new ArrayList<>());
         categoryNumberMap.put("SC", new ArrayList<>());
         categoryNumberMap.put("Others", new ArrayList<>());
+
+        ivHome.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startMenu(QueueDisplayActivity.this);
+            }
+        });
 
         // Retrieve the category information from the intent
         String category = getIntent().getStringExtra("category");
@@ -166,6 +183,12 @@ public class QueueDisplayActivity extends RobotActivity implements RobotLifecycl
 
     @Override
     public void onRobotFocusRefused(String reason) {
+    }
+
+    // Method to start the MenuActivity
+    private void startMenu(Context context) {
+        Intent intent = new Intent(context, MenuActivity.class);
+        context.startActivity(intent);
     }
 
     private void startBackFAQ() {

@@ -17,7 +17,12 @@
     <string name="IT">IT Enhanced Learning Experience
         Republic Polytechnic (RP) believes in using Information Technology (IT) to enrich and support the learning experience of all our students.</string>
     <string name="scan">Scan to Find Out More!</string>
-    <string name="GRAD">This is the Graduation Event description</string>
-    <string name="MOMNT">This is the Momentum Event description</string>
-    <string name="RF">This is the Reflections Event description</string>
+    <string name="GRAD">Congratulations to the graduating class of 2023!
+
+Republic Polytechnic (RP) is celebrating this joyous occasion with the graduating cohort, on campus, at The Republic Cultural Centre (TRCC).
+
+Remember to register your attendance for the Graduation Ceremony and register tickets for your family members and friends. If they are unable to attend your graduation ceremony, they may witness the ceremony by viewing the live webcast.</string>
+    <string name="MOMNT">Momentum - RP Dance Festival held annually in May, aims to encourage creativity in dance and promote original works of various dance genres.
+</string>
+    <string name="RF">Reflections - RP Community Arts Festival is a 3-week long festival of music, dance, theatre and visual arts, variety shows, exhibitions or seminars, where local talents are provided with the environment to encourage the creative expressions of various art forms. Due to the current COVID-19 pandemic, the Festival will be brought to the Virtual Space with one physical performance. </string>
 </resources>

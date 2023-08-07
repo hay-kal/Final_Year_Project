@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.aldebaran.qi.Future;
 import com.aldebaran.qi.sdk.QiContext;
@@ -43,7 +44,7 @@ public class FoundItemFormActivity extends RobotActivity implements RobotLifecyc
 
     ListStorage listStorage;
     EditText etItem, etChar, etColour;
-//    private SharedPreferences sharedPreferences;
+    //    private SharedPreferences sharedPreferences;
     Button btnNext;
     ImageView btnPic, btnBack;
 
@@ -111,21 +112,28 @@ public class FoundItemFormActivity extends RobotActivity implements RobotLifecyc
 //                etItem.setText(sharedPreferences.getString("item", ""));
 //                etColour.setText(sharedPreferences.getString("colour", ""));
 
-                // If you have an image byte array, save it to storage
-                byte[] imageData = pictureArray; // Replace this with your actual image byte array
-
-                if (imageData != null) {
-                    listStorage.saveImageToStorage(getApplicationContext(), "image_" + System.currentTimeMillis(), imageData);
-                    Log.i(TAG, "Image Saved to Storage " + System.currentTimeMillis());
+                if (character.isEmpty() || item.isEmpty() || colour.isEmpty()) {
+                    // If any of the fields is empty, show a toast message
+                    Toast.makeText(FoundItemFormActivity.this, "Please enter all inputs.", Toast.LENGTH_SHORT).show();
                 } else {
-                    Log.e(TAG, "not saved!");
+                    // Process the inputs here
+                    // Your code for further processing or actions goes here
+                    byte[] imageData = pictureArray;
+
+                    if (imageData != null) {
+                        listStorage.saveImageToStorage(getApplicationContext(), "image_" + System.currentTimeMillis(), imageData);
+                        Log.i(TAG, "Image Saved to Storage " + System.currentTimeMillis());
+                    } else {
+                        Log.e(TAG, "not saved!");
+                    }
+
+                    // Add the new item to the list and save the updated list to storage
+                    listStorage.addListItem(item, colour, character, currentDate, imageData);
+                    Toast.makeText(FoundItemFormActivity.this, "Item Submitted!", Toast.LENGTH_SHORT).show();
+
+                    //finish();
+                    startBackActivity();
                 }
-
-                // Add the new item to the list and save the updated list to storage
-                listStorage.addListItem(item, colour, character, currentDate, imageData);
-
-                //finish();
-                startBackActivity();
             }
         });
 

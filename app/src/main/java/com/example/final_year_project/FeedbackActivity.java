@@ -2,11 +2,13 @@ package com.example.final_year_project;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.Toast;
 
@@ -31,7 +33,10 @@ import java.util.Locale;
 
 public class FeedbackActivity extends RobotActivity implements RobotLifecycleCallbacks {
 
-    Button btnBack, btnHome, btnSubmit;
+    Button btnSubmit;
+
+    ImageView ivBack, ivHome;
+
 
     EditText etComments;
     RatingBar rbFeedback;
@@ -48,8 +53,8 @@ public class FeedbackActivity extends RobotActivity implements RobotLifecycleCal
 
         QiSDK.register(this, this);
 
-        btnBack = findViewById(R.id.btnBack);
-        btnHome = findViewById(R.id.btnHome);
+        ivBack = findViewById(R.id.ivBack);
+        ivHome = findViewById(R.id.ivHome);
         btnSubmit = findViewById(R.id.buttonSubmit);
         rbFeedback = findViewById(R.id.ratingBar);
         etComments = findViewById(R.id.editTextComments);
@@ -64,17 +69,19 @@ public class FeedbackActivity extends RobotActivity implements RobotLifecycleCal
             }
         });
 
-        btnBack.setOnClickListener(new View.OnClickListener() {
+        ivBack.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
-                startActivityBack();
+            public void onClick(View view) {
+                // For example, start a new activity using an Intent
+                // To be replaced with startEvents after testing
+                back();
             }
         });
 
-        btnHome.setOnClickListener(new View.OnClickListener() {
+        ivHome.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
-                startActivityHome();
+            public void onClick(View view) {
+                startMenu(FeedbackActivity.this);
             }
         });
 
@@ -212,4 +219,16 @@ public class FeedbackActivity extends RobotActivity implements RobotLifecycleCal
     public void onRobotFocusRefused(String reason) {
 
     }
+
+    // Method to finish the current activity and go back to the previous one
+    private void back() {
+        finish();
+    }
+
+    // Method to start the MenuActivity
+    private void startMenu(Context context) {
+        Intent intent = new Intent(context, MenuActivity.class);
+        context.startActivity(intent);
+    }
+
 }

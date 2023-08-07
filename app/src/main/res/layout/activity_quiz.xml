@@ -3,116 +3,107 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".QuizActivity">
+    android:layout_height="match_parent">
 
     <ImageView
-        android:id="@+id/imageView3"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:alpha="0.2"
-        android:scaleType="centerCrop"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintDimensionRatio="H,3:5"
-        app:srcCompat="@drawable/background" />
-
-    <TextView
-        android:id="@+id/questionTextView"
-        android:layout_width="430dp"
-        android:layout_height="79dp"
-        android:layout_marginTop="36dp"
-        android:text="When was RP Founded?"
-        android:textSize="35sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.531"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-
-    <Button
-        android:id="@+id/answerButton1"
-        android:layout_width="179dp"
-        android:layout_height="82dp"
-        android:layout_marginHorizontal="16dp"
-        android:layout_marginStart="392dp"
-        android:layout_marginTop="36dp"
-        android:text="2001"
-        android:onClick="openQuizWrongActivity"
-        android:textSize="18sp"
-        app:layout_constraintHorizontal_chainStyle="spread"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/questionTextView" />
-
-    <Button
-        android:id="@+id/answerButton2"
-        android:layout_width="179dp"
-        android:layout_height="82dp"
-        android:layout_marginStart="392dp"
-        android:layout_marginTop="144dp"
-        android:text="2002"
-        android:onClick="openQuizCorrectActivity"
-        android:textSize="18sp"
-        app:layout_constraintHorizontal_chainStyle="spread"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/questionTextView" />
-
-    <Button
-        android:id="@+id/answerButton3"
-        android:layout_width="179dp"
-        android:layout_height="82dp"
-        android:layout_marginTop="252dp"
-        android:layout_marginEnd="388dp"
-        android:text="2003"
-        android:textSize="18sp"
-        android:onClick="openQuizWrongActivity"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintHorizontal_chainStyle="spread"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/questionTextView" />
-
-    <Button
-        android:id="@+id/btnBack"
+        android:id="@+id/imageView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:alpha="0.4"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/web_1920__1" />
+
+    <ImageView
+        android:id="@+id/imageViewQuizIcon"
+        android:layout_width="235dp"
+        android:layout_height="210dp"
+        android:layout_marginBottom="308dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.221"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintVertical_bias="0.15"
+        app:srcCompat="@drawable/tictactoe" />
+
+
+    <TextView
+        android:id="@+id/textViewResult"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Quiz Start"
+        android:textSize="80dp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.658"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.279" />
+
+    <TextView
+        android:id="@+id/textViewExplanation"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="How well do you know Republic Polytechnic?"
+        android:textAlignment="center"
+        android:textSize="40dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.594" />
+
+    <Button
+        android:id="@+id/buttonStart"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:backgroundTint="#851798"
+        android:color="#ff6750a4"
+        android:onClick="openMenuActivity"
+        android:text="START!"
+        android:textSize="70sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.858" />
+
+    <ImageView
+        android:id="@+id/ivBack"
+        android:layout_width="82dp"
+        android:layout_height="60dp"
+        android:adjustViewBounds="true"
+        android:clickable="true"
         android:onClick="goBack"
         android:text="Back"
         android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.046"
+        app:layout_constraintDimensionRatio="H,1:3"
+        app:layout_constraintEnd_toEndOf="@+id/imageView"
+        app:layout_constraintHorizontal_bias="0.062"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.045"></Button>
+        app:layout_constraintVertical_bias="0.036"
+        app:srcCompat="@drawable/back"></ImageView>
 
-    <Button
-        android:id="@+id/btnHome"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+    <ImageView
+        android:id="@+id/ivHome"
+        android:layout_width="82dp"
+        android:layout_height="60dp"
+        android:clickable="true"
+        android:contentDescription="Home Button"
         android:onClick="goToHome"
         android:text="Home"
         android:textSize="18sp"
-        android:contentDescription="Home Button"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/imageView3"
-        app:layout_constraintHorizontal_bias="0.951"
+        app:layout_constraintEnd_toEndOf="@+id/imageView"
+        app:layout_constraintHorizontal_bias="0.155"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.065"></Button>
-
-    <ImageView
-        android:id="@+id/imageView27"
-        android:layout_width="148dp"
-        android:layout_height="62dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.987"
-        app:srcCompat="@drawable/imgbin_nanyang_polytechnic_republic_polytechnic_school_education_diploma_png"/>
+        app:layout_constraintVertical_bias="0.036"
+        app:srcCompat="@drawable/home"></ImageView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

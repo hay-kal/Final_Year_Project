@@ -307,6 +307,12 @@ public class MainActivity extends RobotActivity implements RobotLifecycleCallbac
         context.startActivity(intent);
     }
 
+    // Method to start the Feedback Activity
+    private void startQuizActivity(Context context) {
+        Intent intent = new Intent(context, FeedbackActivity.class);
+        context.startActivity(intent);
+    }
+
     // Method to finish the current activity and go back to the previous one
     private void back() {
         finish();

@@ -21,6 +21,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
+        android:backgroundTint="#851798"
+        android:color="#ff6750a4"
         android:text="Go Back" />
 
     <ImageView

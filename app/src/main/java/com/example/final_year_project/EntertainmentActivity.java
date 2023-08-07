@@ -50,7 +50,7 @@ public class EntertainmentActivity extends RobotActivity implements RobotLifecyc
         btnQuiz.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startMenu(EntertainmentActivity.this);
+                startQuizActivity(EntertainmentActivity.this);
             }
         });
 
@@ -111,6 +111,11 @@ public class EntertainmentActivity extends RobotActivity implements RobotLifecyc
 
     private void startFAQActivity(Context context){
         Intent intent = new Intent(context, FAQsMenuActivity.class);
+        context.startActivity(intent);
+    }
+
+    private void startQuizActivity(Context context){
+        Intent intent = new Intent(context, QuizActivity.class);
         context.startActivity(intent);
     }
 

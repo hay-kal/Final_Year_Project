@@ -21,6 +21,23 @@
         app:srcCompat="@drawable/web_1920__1" />
 
     <ImageView
+        android:id="@+id/ivBack"
+        android:layout_width="82dp"
+        android:layout_height="60dp"
+        android:adjustViewBounds="true"
+        android:clickable="true"
+        android:text="Back"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintDimensionRatio="H,1:3"
+        app:layout_constraintEnd_toEndOf="@+id/imageView"
+        app:layout_constraintHorizontal_bias="0.062"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.036"
+        app:srcCompat="@drawable/back"></ImageView>
+
+    <ImageView
         android:id="@+id/ivHome"
         android:layout_width="82dp"
         android:layout_height="60dp"
@@ -30,29 +47,12 @@
         android:text="Home"
         android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.111"
+        app:layout_constraintEnd_toEndOf="@+id/imageView"
+        app:layout_constraintHorizontal_bias="0.155"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.059"
+        app:layout_constraintVertical_bias="0.036"
         app:srcCompat="@drawable/home"></ImageView>
-
-    <ImageView
-        android:id="@+id/ivBack"
-        android:layout_width="82dp"
-        android:layout_height="60dp"
-        android:adjustViewBounds="true"
-        android:clickable="true"
-        android:onClick="goBack"
-        android:text="Back"
-        android:textSize="18sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.018"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.059"
-        app:srcCompat="@drawable/back"></ImageView>
 
     <TextView
         android:id="@+id/textView2"
