@@ -8,31 +8,14 @@
 
     <ImageView
         android:id="@+id/imageView2"
-        android:clickable="false"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:srcCompat="@drawable/background"
         android:alpha="0.4"
+        android:clickable="false"
+        app:srcCompat="@drawable/background"
         tools:ignore="MissingConstraints"
         tools:layout_editor_absoluteX="0dp"
         tools:layout_editor_absoluteY="0dp" />
-
-    <ImageView
-        android:id="@+id/ivHome"
-        android:layout_width="82dp"
-        android:layout_height="60dp"
-        android:clickable="true"
-        android:contentDescription="Home Button"
-        android:onClick="goToHome"
-        android:text="Home"
-        android:textSize="18sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/imageView2"
-        app:layout_constraintHorizontal_bias="0.155"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.036"
-        app:srcCompat="@drawable/home"></ImageView>
 
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -81,13 +64,13 @@
             android:id="@+id/imageView6"
             android:layout_width="148dp"
             android:layout_height="62dp"
+            android:clickable="false"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="1.0"
-            android:clickable="false"
             app:srcCompat="@drawable/imgbin_nanyang_polytechnic_republic_polytechnic_school_education_diploma_png" />
 
         <ImageView
@@ -101,8 +84,39 @@
             app:layout_constraintTop_toBottomOf="@+id/titleQueueNum"
             app:srcCompat="@drawable/opaque_rounded_rectangle" />
 
+        <ImageView
+            android:id="@+id/ivBack"
+            android:layout_width="82dp"
+            android:layout_height="60dp"
+            android:adjustViewBounds="true"
+            android:clickable="true"
+            android:onClick="goBack"
+            android:text="Back"
+            android:textSize="18sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.06"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.029"
+            app:srcCompat="@drawable/back"></ImageView>
 
-
+        <ImageView
+            android:id="@+id/ivHome"
+            android:layout_width="82dp"
+            android:layout_height="60dp"
+            android:clickable="true"
+            android:contentDescription="Home Button"
+            android:onClick="goToHome"
+            android:text="Home"
+            android:textSize="18sp"
+            app:layout_constraintBottom_toBottomOf="@+id/titleReminder"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toEndOf="@+id/ivBack"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.03"
+            app:srcCompat="@drawable/home"></ImageView>
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

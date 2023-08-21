@@ -1,5 +1,7 @@
 package com.example.final_year_project;
 
+import android.content.ContentResolver;
+import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -8,7 +10,9 @@ import android.graphics.BitmapFactory;
 import android.hardware.camera2.CameraDevice;
 import android.hardware.camera2.CameraManager;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.util.Log;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -16,8 +20,8 @@ import android.widget.ImageView;
 import androidx.annotation.NonNull;
 
 import com.aldebaran.qi.Future;
-import com.aldebaran.qi.sdk.QiSDK;
 import com.aldebaran.qi.sdk.QiContext;
+import com.aldebaran.qi.sdk.QiSDK;
 import com.aldebaran.qi.sdk.RobotLifecycleCallbacks;
 import com.aldebaran.qi.sdk.builder.AnimateBuilder;
 import com.aldebaran.qi.sdk.builder.AnimationBuilder;
@@ -42,12 +46,6 @@ import com.aldebaran.qi.sdk.object.image.EncodedImageHandle;
 import com.aldebaran.qi.sdk.object.image.TimestampedImageHandle;
 import com.aldebaran.qi.sdk.util.PhraseSetUtil;
 
-import android.content.ContentResolver;
-import android.content.ContentValues;
-import android.os.Build;
-import android.provider.MediaStore;
-
-
 import java.io.IOException;
 import java.io.OutputStream;
 import java.nio.ByteBuffer;
@@ -60,6 +58,7 @@ public class FoundItemPicture extends RobotActivity implements RobotLifecycleCal
 
     private ListStorage listStorage;
 
+    ImageView ivBack, ivHome;
     private static final String TAG = "CameraExample";
     private CameraDevice cameraDevice;
     private CameraManager cameraManager;

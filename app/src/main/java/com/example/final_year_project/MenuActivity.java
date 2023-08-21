@@ -60,7 +60,7 @@ public class MenuActivity extends RobotActivity implements RobotLifecycleCallbac
             public void onClick(View view) {
                 // For example, start a new activity using an Intent
                 // To be replaced with startEvents after testing
-                back();
+                startEvents(MenuActivity.this);
             }
         });
 
@@ -115,7 +115,7 @@ public class MenuActivity extends RobotActivity implements RobotLifecycleCallbac
 
         // Create a new say action.
         Say say = SayBuilder.with(qiContext)
-                .withText("Welcome to the Menu, Here you can select from the buttons below to interact with a certain module! If you are unsure of what to pick and need help with a specific topic, Say it out loud so I can refer you to the FAQ section or the front desk.")
+                .withText("Welcome to the Menu, Here you can select from the buttons below to interact with a certain module! If you are unsure of what to pick and need help with a specific topic, Pick the Others category under the FAQ section.")
                 .build();
 
         Say sayNext = SayBuilder.with(qiContext)
@@ -142,7 +142,7 @@ public class MenuActivity extends RobotActivity implements RobotLifecycleCallbac
                 .build();
 
         PhraseSet phraseSetHome = PhraseSetBuilder.with(qiContext)
-                .withTexts("Home")
+                .withTexts("Welcome")
                 .build();
 
         // Create the PhraseSet 2.
@@ -177,11 +177,11 @@ public class MenuActivity extends RobotActivity implements RobotLifecycleCallbac
 
                 // Run the animate action asynchronously.
                 Future<Void> animateFuture = animate.async().run();
-                startMenu(MenuActivity.this);
+                startEvents(MenuActivity.this);
             } else if (PhraseSetUtil.equals(matchedPhraseSet, phraseSetHome)) {
-                Log.i(TAG, "Heard phrase set: Home Page");
+                Log.i(TAG, "Heard phrase set: Welcome Page");
                 sayBack.run();
-                startHome(MenuActivity.this);
+                startWelcome(MenuActivity.this);
             } else if (PhraseSetUtil.equals(matchedPhraseSet, phraseSetMenu)) {
                 Log.i(TAG, "Heard phrase set: Menu Page");
                 sayBack.run();
@@ -241,7 +241,10 @@ public class MenuActivity extends RobotActivity implements RobotLifecycleCallbac
         Intent intent = new Intent(context, FeedbackActivity.class);
         context.startActivity(intent);
     }
-
+    private void startWelcome(Context context){
+        Intent intent = new Intent(context, MainActivity.class);
+        context.startActivity(intent);
+    }
     // Method to finish the current activity and go back to the previous one
     private void back() {
         finish();

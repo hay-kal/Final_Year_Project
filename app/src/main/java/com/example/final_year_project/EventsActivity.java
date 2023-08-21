@@ -4,45 +4,31 @@ import static android.content.ContentValues.TAG;
 
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.hardware.camera2.CameraDevice;
-import android.hardware.camera2.CameraManager;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 
 import com.aldebaran.qi.Future;
-import com.aldebaran.qi.sdk.QiSDK;
 import com.aldebaran.qi.sdk.QiContext;
+import com.aldebaran.qi.sdk.QiSDK;
 import com.aldebaran.qi.sdk.RobotLifecycleCallbacks;
 import com.aldebaran.qi.sdk.builder.AnimateBuilder;
 import com.aldebaran.qi.sdk.builder.AnimationBuilder;
 import com.aldebaran.qi.sdk.builder.ListenBuilder;
 import com.aldebaran.qi.sdk.builder.PhraseSetBuilder;
 import com.aldebaran.qi.sdk.builder.SayBuilder;
-import com.aldebaran.qi.sdk.builder.TakePictureBuilder;
 import com.aldebaran.qi.sdk.design.activity.RobotActivity;
 import com.aldebaran.qi.sdk.design.activity.conversationstatus.SpeechBarDisplayPosition;
 import com.aldebaran.qi.sdk.design.activity.conversationstatus.SpeechBarDisplayStrategy;
 import com.aldebaran.qi.sdk.object.actuation.Animate;
 import com.aldebaran.qi.sdk.object.actuation.Animation;
-import com.aldebaran.qi.sdk.object.camera.TakePicture;
 import com.aldebaran.qi.sdk.object.conversation.Listen;
 import com.aldebaran.qi.sdk.object.conversation.ListenResult;
 import com.aldebaran.qi.sdk.object.conversation.PhraseSet;
 import com.aldebaran.qi.sdk.object.conversation.Say;
-import com.aldebaran.qi.sdk.object.image.EncodedImage;
-import com.aldebaran.qi.sdk.object.image.EncodedImageHandle;
-import com.aldebaran.qi.sdk.object.image.TimestampedImageHandle;
 import com.aldebaran.qi.sdk.util.PhraseSetUtil;
-import com.aldebaran.qi.sdk.design.activity.conversationstatus.SpeechBarDisplayPosition;
-import com.aldebaran.qi.sdk.design.activity.conversationstatus.SpeechBarDisplayStrategy;
-
-import java.nio.ByteBuffer;
 
 public class EventsActivity extends RobotActivity implements RobotLifecycleCallbacks {
 
@@ -76,7 +62,7 @@ public class EventsActivity extends RobotActivity implements RobotLifecycleCallb
             public void onClick(View view) {
                 // For example, start a new activity using an Intent
                 // To be replaced with startEvents after testing
-                startBackActivity();
+                startHome(EventsActivity.this);
             }
         });
 

@@ -1,5 +1,6 @@
 package com.example.final_year_project;
 
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.hardware.camera2.CameraDevice;
@@ -46,7 +47,7 @@ public class FoundItemFormActivity extends RobotActivity implements RobotLifecyc
     EditText etItem, etChar, etColour;
     //    private SharedPreferences sharedPreferences;
     Button btnNext;
-    ImageView btnPic, btnBack;
+    ImageView btnPic, btnBack, ivHome;
 
 
     // Store the Animate action.
@@ -84,6 +85,7 @@ public class FoundItemFormActivity extends RobotActivity implements RobotLifecyc
         btnBack = findViewById(R.id.back);
         btnPic = findViewById(R.id.imageTakePic);
         btnNext = findViewById(R.id.btnNext);
+        ivHome = findViewById(R.id.ivHome);
 
 
 
@@ -94,7 +96,12 @@ public class FoundItemFormActivity extends RobotActivity implements RobotLifecyc
 
         QiSDK.register(this, this);
 
-
+        ivHome.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startMenu(FoundItemFormActivity.this);
+            }
+        });
         btnNext.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -160,6 +167,11 @@ public class FoundItemFormActivity extends RobotActivity implements RobotLifecyc
         // Unregister the RobotLifecycleCallbacks for this Activity.
         QiSDK.unregister(this, this);
         super.onDestroy();
+    }
+
+    private void startMenu(Context context){
+        Intent intent = new Intent(context, MenuActivity.class);
+        context.startActivity(intent);
     }
 
     @Override

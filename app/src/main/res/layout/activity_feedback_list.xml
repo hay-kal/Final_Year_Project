@@ -6,14 +6,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <!-- Green top bar -->
-
-
-    <!-- Header text and button and search -->
-
-
-    <!-- The btnBack button is aligned to the left -->
-
 
     <ImageView
         android:id="@+id/imageView15"

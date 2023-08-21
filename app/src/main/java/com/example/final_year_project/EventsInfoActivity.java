@@ -1,7 +1,10 @@
 package com.example.final_year_project;
 
+import static android.content.ContentValues.TAG;
+
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -13,6 +16,7 @@ import com.aldebaran.qi.sdk.RobotLifecycleCallbacks;
 import com.aldebaran.qi.sdk.design.activity.RobotActivity;
 import com.aldebaran.qi.sdk.design.activity.conversationstatus.SpeechBarDisplayPosition;
 import com.aldebaran.qi.sdk.design.activity.conversationstatus.SpeechBarDisplayStrategy;
+import com.bumptech.glide.Glide;
 
 public class EventsInfoActivity extends RobotActivity implements RobotLifecycleCallbacks {
 
@@ -25,6 +29,7 @@ public class EventsInfoActivity extends RobotActivity implements RobotLifecycleC
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Log.i(TAG, "EVENT INFO ACTIVITY STARTED 1");
         setContentView(R.layout.activity_events_info);
         event = getIntent().getStringExtra("event");
         String GRAD = getResources().getString(R.string.GRAD);
@@ -34,10 +39,14 @@ public class EventsInfoActivity extends RobotActivity implements RobotLifecycleC
         int MOMNTQR = R.drawable.momentumqr;
         int RFQR = R.drawable.reflectionsqr;
 
+        Log.i(TAG, "EVENT INFO ACTIVITY STARTED 2");
+
         // Register the RobotLifecycleCallbacks to this Activity.
         setSpeechBarDisplayStrategy(SpeechBarDisplayStrategy.IMMERSIVE);
         setSpeechBarDisplayPosition(SpeechBarDisplayPosition.BOTTOM);
         QiSDK.register(this, this);
+
+        Log.i(TAG, "EVENT INFO ACTIVITY STARTED 3");
 
         Back = findViewById(R.id.btnBack);
         btnDirect = findViewById(R.id.btnHelp);
@@ -45,22 +54,36 @@ public class EventsInfoActivity extends RobotActivity implements RobotLifecycleC
         content = findViewById(R.id.tvContent);
         qr = findViewById(R.id.ivQR);
 
+        Log.i(TAG, "EVENT INFO ACTIVITY STARTED 4");
 
         if (event != null) {
             if (event.equals("GRAD")) {
                 categoryTitle.setText("Graduation Event:");
                 content.setText(GRAD);
-                qr.setImageResource(GRADQR);
+                Glide.with(this)
+                        .load(GRADQR)
+                        .into(qr);
+                Log.i(TAG, "EVENT INFO ACTIVITY STARTED 4.5");
+
             } else if (event.equals("MOMNT")) {
                 categoryTitle.setText("Momentum Events:");
                 content.setText(MOMNT);
-                qr.setImageResource(MOMNTQR);
+                Glide.with(this)
+                        .load(GRADQR)
+                        .into(qr);
+                Log.i(TAG, "EVENT INFO ACTIVITY STARTED 4.5");
+
             } else if (event.equals("RF")) {
                 categoryTitle.setText("Reflections Event:");
                 content.setText(RF);
-                qr.setImageResource(RFQR);
+                Glide.with(this)
+                        .load(GRADQR)
+                        .into(qr);
+                Log.i(TAG, "EVENT INFO ACTIVITY STARTED 4.5");
             }
         }
+
+        Log.i(TAG, "EVENT INFO ACTIVITY STARTED 5");
         Back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

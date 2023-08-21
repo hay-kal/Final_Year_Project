@@ -103,7 +103,7 @@ public class GuidanceActivity extends RobotActivity implements RobotLifecycleCal
             public void onClick(View view) {
                 // For example, start a new activity using an Intent
                 // To be replaced with startEvents after testing
-                startBackActivity();
+                startMenu(GuidanceActivity.this);
             }
         });
 

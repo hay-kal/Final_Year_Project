@@ -129,7 +129,7 @@
             app:srcCompat="@drawable/back" />
 
         <ImageView
-            android:id="@+id/imageView24"
+            android:id="@+id/ivHome"
             android:layout_width="82dp"
             android:layout_height="60dp"
             app:layout_constraintBottom_toTopOf="@+id/ivBack"

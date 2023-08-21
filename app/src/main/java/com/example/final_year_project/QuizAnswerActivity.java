@@ -5,6 +5,7 @@ import static android.content.ContentValues.TAG;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.service.controls.ControlsProviderService;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -14,9 +15,17 @@ import android.widget.TextView;
 import com.aldebaran.qi.sdk.QiContext;
 import com.aldebaran.qi.sdk.QiSDK;
 import com.aldebaran.qi.sdk.RobotLifecycleCallbacks;
+import com.aldebaran.qi.sdk.builder.ListenBuilder;
+import com.aldebaran.qi.sdk.builder.PhraseSetBuilder;
+import com.aldebaran.qi.sdk.builder.SayBuilder;
 import com.aldebaran.qi.sdk.design.activity.RobotActivity;
 import com.aldebaran.qi.sdk.design.activity.conversationstatus.SpeechBarDisplayPosition;
 import com.aldebaran.qi.sdk.design.activity.conversationstatus.SpeechBarDisplayStrategy;
+import com.aldebaran.qi.sdk.object.conversation.Listen;
+import com.aldebaran.qi.sdk.object.conversation.ListenResult;
+import com.aldebaran.qi.sdk.object.conversation.PhraseSet;
+import com.aldebaran.qi.sdk.object.conversation.Say;
+import com.aldebaran.qi.sdk.util.PhraseSetUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,14 +34,11 @@ public class QuizAnswerActivity extends RobotActivity implements RobotLifecycleC
 
     private List<Integer> askedQuestions, score;
     Button btnNext, btnEnt;
-
     TextView tvAns, tvExpl;
-
     ImageView ivAns, ivBack, ivHome;
-
     String marking;
     int questionNumber;
-
+    private QiContext qiContext;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -136,7 +142,34 @@ public class QuizAnswerActivity extends RobotActivity implements RobotLifecycleC
 
     @Override
     public void onRobotFocusGained(QiContext qiContext) {
-
+        if (questionNumber == 1) {
+            Say qn = SayBuilder.with(qiContext).withText("The answer is 2002," + "Republic Polytechnic was established in 2002, and it was at the temporary Tanglin campus").build();
+            qn.run();
+        } else if (questionNumber == 2) {
+            Say qn = SayBuilder.with(qiContext).withText("The answer is 7" + "There are a total of 7 schools in Republic Polytechnic. School of Applied Science (SAS), School of Engineering (SEG), School of Hospitality (SOH), School of Infocomm (SOI), School of Management and Communication (SMC), School of Sports, Health and Leisure (SHL), and School of Technology for the Arts (STA)").build();
+            qn.run();
+        } else if (questionNumber == 3) {
+            Say qn = SayBuilder.with(qiContext).withText("The answer is 43" + "There are a total of 43 courses in Republic Polytechnic").build();
+            qn.run();
+        }
+        PhraseSet phraseSetNext = PhraseSetBuilder.with(qiContext)
+                .withTexts("Next").build();
+        PhraseSet phraseSetMenu = PhraseSetBuilder.with(qiContext)
+                .withTexts("Menu").build();
+        Listen listen = ListenBuilder.with(qiContext).withPhraseSets(phraseSetMenu, phraseSetNext).build();
+        this.qiContext = qiContext;
+        while (true) {
+            ListenResult listenResult = listen.run();
+            Log.i(ControlsProviderService.TAG, "Heard phrase: " + listenResult.getHeardPhrase().getText());
+            // Identify the matched phrase set.
+            PhraseSet matchedPhraseSet = listenResult.getMatchedPhraseSet();
+            if (PhraseSetUtil.equals(matchedPhraseSet, phraseSetNext)) {
+                clearViews();
+                startQuizActivity(askedQuestions, score);
+            } else if (PhraseSetUtil.equals(matchedPhraseSet, phraseSetMenu)) {
+                startMenu(QuizAnswerActivity.this);
+            }
+        }
     }
 
     private String checkCorrect(List<Integer> scoreList) {
@@ -154,9 +187,16 @@ public class QuizAnswerActivity extends RobotActivity implements RobotLifecycleC
 
 
     private void clearViews(){
-        tvAns.setText("");
-        tvExpl.setText("");
-        ivAns.setImageDrawable(null);
+
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+
+                tvAns.setText("");
+                tvExpl.setText("");
+                ivAns.setImageDrawable(null);
+            }
+        });
     }
 
     private int questionNo(List<Integer> askedList) {

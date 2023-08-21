@@ -2,8 +2,6 @@ package com.example.final_year_project;
 
 import static android.content.ContentValues.TAG;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -36,7 +34,7 @@ public class QueueDisplayActivity extends RobotActivity implements RobotLifecycl
 
     TextView textView;
 
-    ImageView ivHome;
+    ImageView ivHome, ivBack;
     String newNumber;
     Map<String, List<String>> categoryNumberMap;
     SharedPreferences sharedPreferences;
@@ -52,6 +50,7 @@ public class QueueDisplayActivity extends RobotActivity implements RobotLifecycl
         textView = findViewById(R.id.tvQueue);
         sharedPreferences = getSharedPreferences("MyPrefs", MODE_PRIVATE);
         ivHome = findViewById(R.id.ivHome);
+        ivBack = findViewById(R.id.ivBack);
 
         // Initialize the category and numbers mapping
         categoryNumberMap = new HashMap<>();
@@ -68,6 +67,14 @@ public class QueueDisplayActivity extends RobotActivity implements RobotLifecycl
                 startMenu(QueueDisplayActivity.this);
             }
         });
+
+        ivBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startBackFAQ();
+            }
+        });
+
 
         // Retrieve the category information from the intent
         String category = getIntent().getStringExtra("category");

@@ -5,17 +5,27 @@ import static android.content.ContentValues.TAG;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.service.controls.ControlsProviderService;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.aldebaran.qi.sdk.QiContext;
 import com.aldebaran.qi.sdk.QiSDK;
 import com.aldebaran.qi.sdk.RobotLifecycleCallbacks;
+import com.aldebaran.qi.sdk.builder.ListenBuilder;
+import com.aldebaran.qi.sdk.builder.PhraseSetBuilder;
+import com.aldebaran.qi.sdk.builder.SayBuilder;
 import com.aldebaran.qi.sdk.design.activity.RobotActivity;
 import com.aldebaran.qi.sdk.design.activity.conversationstatus.SpeechBarDisplayPosition;
 import com.aldebaran.qi.sdk.design.activity.conversationstatus.SpeechBarDisplayStrategy;
+import com.aldebaran.qi.sdk.object.conversation.Listen;
+import com.aldebaran.qi.sdk.object.conversation.ListenResult;
+import com.aldebaran.qi.sdk.object.conversation.PhraseSet;
+import com.aldebaran.qi.sdk.object.conversation.Say;
+import com.aldebaran.qi.sdk.util.PhraseSetUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,8 +35,9 @@ public class QuizActivity extends RobotActivity implements RobotLifecycleCallbac
     private List<Integer> askedQuestions;
     ImageView ivBack, ivHome;
 
-
+    TextView tvTitle;
     Button btnStart;
+    private QiContext qiContext;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,6 +53,7 @@ public class QuizActivity extends RobotActivity implements RobotLifecycleCallbac
         askedQuestions = new ArrayList<>();
         ivBack = findViewById(R.id.ivBack);
         ivHome = findViewById(R.id.ivHome);
+        tvTitle = findViewById(R.id.textViewExplanation);
 
         ivBack.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -100,25 +112,25 @@ public class QuizActivity extends RobotActivity implements RobotLifecycleCallbac
     }
 
     // Method to start the FAQsMenuActivity
-    private void startFAQActivity(Context context){
+    private void startFAQActivity(Context context) {
         Intent intent = new Intent(context, FAQsMenuActivity.class);
         context.startActivity(intent);
     }
 
     // Method to start the Lost and Found Activity
-    private void startLnFActivity(Context context){
+    private void startLnFActivity(Context context) {
         Intent intent = new Intent(context, LostAndFoundActivity.class);
         context.startActivity(intent);
     }
 
     // Method to start the Guidance Activity
-    private void startGuidanceActivity(Context context){
+    private void startGuidanceActivity(Context context) {
         Intent intent = new Intent(context, GuidanceActivity.class);
         context.startActivity(intent);
     }
 
     // Method to start the Feedback Activity
-    private void startFeedbackActivity(Context context){
+    private void startFeedbackActivity(Context context) {
         Intent intent = new Intent(context, FeedbackActivity.class);
         context.startActivity(intent);
     }
@@ -130,7 +142,21 @@ public class QuizActivity extends RobotActivity implements RobotLifecycleCallbac
 
     @Override
     public void onRobotFocusGained(QiContext qiContext) {
-
+        Say welcomeQuiz = SayBuilder.with(qiContext).withText("Welcome to the quiz section, now" + tvTitle.getText() + " Say start to begin with the quiz").build();
+        PhraseSet phraseSetStart = PhraseSetBuilder.with(qiContext)
+                .withTexts("Start").build();
+        welcomeQuiz.run();
+        Listen listen = ListenBuilder.with(qiContext).withPhraseSets(phraseSetStart).build();
+        this.qiContext = qiContext;
+        while (true) {
+            ListenResult listenResult = listen.run();
+            Log.i(ControlsProviderService.TAG, "Heard phrase: " + listenResult.getHeardPhrase().getText());
+            // Identify the matched phrase set.
+            PhraseSet matchedPhraseSet = listenResult.getMatchedPhraseSet();
+            if (PhraseSetUtil.equals(matchedPhraseSet, phraseSetStart)) {
+                startQuizActivity(askedQuestions);
+            }
+        }
     }
 
     @Override

@@ -3,6 +3,8 @@ package com.example.final_year_project;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.service.controls.ControlsProviderService;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -11,9 +13,17 @@ import android.widget.TextView;
 import com.aldebaran.qi.sdk.QiContext;
 import com.aldebaran.qi.sdk.QiSDK;
 import com.aldebaran.qi.sdk.RobotLifecycleCallbacks;
+import com.aldebaran.qi.sdk.builder.ListenBuilder;
+import com.aldebaran.qi.sdk.builder.PhraseSetBuilder;
+import com.aldebaran.qi.sdk.builder.SayBuilder;
 import com.aldebaran.qi.sdk.design.activity.RobotActivity;
 import com.aldebaran.qi.sdk.design.activity.conversationstatus.SpeechBarDisplayPosition;
 import com.aldebaran.qi.sdk.design.activity.conversationstatus.SpeechBarDisplayStrategy;
+import com.aldebaran.qi.sdk.object.conversation.Listen;
+import com.aldebaran.qi.sdk.object.conversation.ListenResult;
+import com.aldebaran.qi.sdk.object.conversation.PhraseSet;
+import com.aldebaran.qi.sdk.object.conversation.Say;
+import com.aldebaran.qi.sdk.util.PhraseSetUtil;
 
 import java.util.List;
 
@@ -22,8 +32,9 @@ public class QuizResultActivity extends RobotActivity implements RobotLifecycleC
     private List<Integer> score;
     Button btnFinish;
     ImageView ivBack, ivHome;
-
     TextView tvScore;
+    private int totalScore;
+    private QiContext qiContext;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,8 +48,7 @@ public class QuizResultActivity extends RobotActivity implements RobotLifecycleC
         Intent intent = getIntent();
         score = intent.getIntegerArrayListExtra("score");
 
-        int totalScore = sumList(score);
-
+        totalScore = sumList(score);
 
         btnFinish = findViewById(R.id.buttonFinish);
         tvScore = findViewById(R.id.textViewScore);
@@ -99,7 +109,21 @@ public class QuizResultActivity extends RobotActivity implements RobotLifecycleC
 
     @Override
     public void onRobotFocusGained(QiContext qiContext) {
+        Say total = SayBuilder.with(qiContext).withText("You scored " + totalScore + " out of 3" + "Say Finish to exit the quiz.").build();
 
+        PhraseSet phraseSetFinish = PhraseSetBuilder.with(qiContext)
+                .withTexts("Finish").build();
+        Listen listen = ListenBuilder.with(qiContext).withPhraseSets(phraseSetFinish).build();
+        this.qiContext = qiContext;
+        while (true) {
+            ListenResult listenResult = listen.run();
+            Log.i(ControlsProviderService.TAG, "Heard phrase: " + listenResult.getHeardPhrase().getText());
+            // Identify the matched phrase set.
+            PhraseSet matchedPhraseSet = listenResult.getMatchedPhraseSet();
+            if (PhraseSetUtil.equals(matchedPhraseSet, phraseSetFinish)) {
+                startEntertainmentActivity();
+            }
+        }
     }
 
     @Override

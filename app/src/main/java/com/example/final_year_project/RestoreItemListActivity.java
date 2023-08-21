@@ -159,7 +159,7 @@ public class RestoreItemListActivity extends RobotActivity implements RobotLifec
     }
 
     private void startLostActivity(Context context){
-        Intent intent = new Intent(context, LostAndFoundActivity.class);
+        Intent intent = new Intent(context, ItemListActivity.class);
         context.startActivity(intent);
     }
     private void startMenu(Context context){

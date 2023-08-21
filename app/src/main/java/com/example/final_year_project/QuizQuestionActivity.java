@@ -5,6 +5,7 @@ import static android.content.ContentValues.TAG;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.service.controls.ControlsProviderService;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -14,9 +15,17 @@ import android.widget.TextView;
 import com.aldebaran.qi.sdk.QiContext;
 import com.aldebaran.qi.sdk.QiSDK;
 import com.aldebaran.qi.sdk.RobotLifecycleCallbacks;
+import com.aldebaran.qi.sdk.builder.ListenBuilder;
+import com.aldebaran.qi.sdk.builder.PhraseSetBuilder;
+import com.aldebaran.qi.sdk.builder.SayBuilder;
 import com.aldebaran.qi.sdk.design.activity.RobotActivity;
 import com.aldebaran.qi.sdk.design.activity.conversationstatus.SpeechBarDisplayPosition;
 import com.aldebaran.qi.sdk.design.activity.conversationstatus.SpeechBarDisplayStrategy;
+import com.aldebaran.qi.sdk.object.conversation.Listen;
+import com.aldebaran.qi.sdk.object.conversation.ListenResult;
+import com.aldebaran.qi.sdk.object.conversation.PhraseSet;
+import com.aldebaran.qi.sdk.object.conversation.Say;
+import com.aldebaran.qi.sdk.util.PhraseSetUtil;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -31,19 +40,17 @@ public class QuizQuestionActivity extends RobotActivity implements RobotLifecycl
 
     private List<Integer> askedQuestions;
     private List<Integer> score;
-
-
     int question;
     int randomQuestion;
-
     TextView tvQuestion;
-
     ImageView ivQn, ivBack, ivHome;
     Button btnAns1, btnAns2, btnAns3;
-
     private static final String CORRECT_ANSWER_Q1 = "2002";
     private static final String CORRECT_ANSWER_Q2 = "7";
     private static final String CORRECT_ANSWER_Q3 = "43";
+    private QiContext qiContext;
+
+    String ansButton1, ansButton2, ansButton3;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,9 +75,13 @@ public class QuizQuestionActivity extends RobotActivity implements RobotLifecycl
             score = new ArrayList<>();
         }
 
+        ansButton1 = "";
+        ansButton2 = "";
+        ansButton3 = "";
+
         tvQuestion = findViewById(R.id.questionTextView);
-        btnAns2 = findViewById(R.id.answerButton2);
         btnAns1 = findViewById(R.id.answerButton1);
+        btnAns2 = findViewById(R.id.answerButton2);
         btnAns3 = findViewById(R.id.answerButton3);
         ivQn = findViewById(R.id.ivQN);
         question = checkAndAddQuestion();
@@ -84,7 +95,7 @@ public class QuizQuestionActivity extends RobotActivity implements RobotLifecycl
             public void onClick(View view) {
                 // For example, start a new activity using an Intent
                 // To be replaced with startEvents after testing
-            startEntertainmentActivity(QuizQuestionActivity.this);
+                startEntertainmentActivity(QuizQuestionActivity.this);
             }
         });
 
@@ -94,8 +105,6 @@ public class QuizQuestionActivity extends RobotActivity implements RobotLifecycl
                 startMenu(QuizQuestionActivity.this);
             }
         });
-
-
 
 
         if (question == 1) {
@@ -118,8 +127,9 @@ public class QuizQuestionActivity extends RobotActivity implements RobotLifecycl
 
         }
 
-
-
+        ansButton1 = btnAns1.getText().toString();
+        ansButton2 = btnAns2.getText().toString();
+        ansButton3 = btnAns3.getText().toString();
 
 
         btnAns1.setOnClickListener(new View.OnClickListener() {
@@ -131,7 +141,6 @@ public class QuizQuestionActivity extends RobotActivity implements RobotLifecycl
                 startAnswerActivity(askedQuestions, score);
             }
         });
-
 
         btnAns2.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -152,13 +161,65 @@ public class QuizQuestionActivity extends RobotActivity implements RobotLifecycl
                 startAnswerActivity(askedQuestions, score);
             }
         });
-
-
     }
 
     @Override
     public void onRobotFocusGained(QiContext qiContext) {
+        if (question == 1) {
+            Say qn = SayBuilder.with(qiContext).withText("Question, " + "When was Republic Polytechnic founded?").build();
+            qn.run();
+        } else if (question == 2) {
+            Say qn = SayBuilder.with(qiContext).withText("Question, " + "How many Schools are there in Republic Polytechnic?").build();
+            qn.run();
+        } else if (question == 3) {
+            Say qn = SayBuilder.with(qiContext).withText("Question, " + "How many Full Time Courses are there in Republic Polytechnic?").build();
+            qn.run();
+        }
+        Say opt = SayBuilder.with(qiContext).withText("Please say option 1, 2, or 3 to select the answer").build();
+        opt.run();
 
+        PhraseSet phraseSetOpt1 = PhraseSetBuilder.with(qiContext)
+                .withTexts("Option 1", "1", "one")
+                .build();
+
+        PhraseSet phraseSetOpt2 = PhraseSetBuilder.with(qiContext)
+                .withTexts("Option 2", "2", "two")
+                .build();
+
+        PhraseSet phraseSetOpt3 = PhraseSetBuilder.with(qiContext)
+                .withTexts("Option 3", "3", "three")
+                .build();
+
+        Listen listen = ListenBuilder.with(qiContext).withPhraseSets(phraseSetOpt1, phraseSetOpt2, phraseSetOpt3).build();
+
+        this.qiContext = qiContext;
+        while (true) {
+            ListenResult listenResult = listen.run();
+
+            Log.i(ControlsProviderService.TAG, "Heard phrase: " + listenResult.getHeardPhrase().getText());
+
+            // Identify the matched phrase set.
+            PhraseSet matchedPhraseSet = listenResult.getMatchedPhraseSet();
+
+            if (PhraseSetUtil.equals(matchedPhraseSet, phraseSetOpt1)) {
+                Log.i(TAG, "Sending: QN " + question + " - ANS:" + ansButton1);
+                checkAnswer(question, ansButton1);
+                clearAllViews();
+                startAnswerActivity(askedQuestions, score);
+
+            } else if (PhraseSetUtil.equals(matchedPhraseSet, phraseSetOpt2)) {
+                Log.i(TAG, "Sending: QN " + question + " - ANS:" + ansButton2);
+                checkAnswer(question, ansButton2);
+                clearAllViews();
+                startAnswerActivity(askedQuestions, score);
+
+            } else if (PhraseSetUtil.equals(matchedPhraseSet, phraseSetOpt3)) {
+                Log.i(TAG, "Sending: QN " + question + " - ANS:" + ansButton3);
+                checkAnswer(question, ansButton3);
+                clearAllViews();
+                startAnswerActivity(askedQuestions, score);
+            }
+        }
     }
 
     @Override
@@ -181,10 +242,16 @@ public class QuizQuestionActivity extends RobotActivity implements RobotLifecycl
     }
 
     private void clearAllViews() {
-        tvQuestion.setText(null);
-        btnAns1.setText(null);
-        btnAns2.setText(null);
-        btnAns3.setText(null);
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                tvQuestion.setText(null);
+                btnAns1.setText(null);
+                btnAns2.setText(null);
+                btnAns3.setText(null);
+
+            }
+        });
     }
 
     private void startResultActivity(List<Integer> scoreArray) {
@@ -259,19 +326,27 @@ public class QuizQuestionActivity extends RobotActivity implements RobotLifecycl
 
         // Set the text of each button with the randomized answer options
         btnAns1.setText(answerOptions.get(0));
+        Log.i(TAG, "Setting QN 1: QN " + answerOptions.get(0));
+
         btnAns2.setText(answerOptions.get(1));
+        Log.i(TAG, "Setting QN 2: QN " + answerOptions.get(1));
+
         btnAns3.setText(answerOptions.get(2));
+        Log.i(TAG, "Setting QN 3: QN " + answerOptions.get(2));
     }
 
     private void checkAnswer(int questionNumber, String selectedAnswer) {
+        Log.i(TAG, "Received:" + selectedAnswer);
         String correctAnswer = getCorrectAnswer(questionNumber);
 
         if (selectedAnswer.equals(correctAnswer)) {
             // Correct answer
             score.add(1); // Add 1 to the score list
+            Log.i(TAG, "Added 1 to score");
         } else {
             // Incorrect answer
             score.add(0); // Add 0 to the score list
+            Log.i(TAG, "Added 0 to score");
         }
 
     }
@@ -282,51 +357,11 @@ public class QuizQuestionActivity extends RobotActivity implements RobotLifecycl
         context.startActivity(intent);
     }
 
-    // Method to start the MainActivity (Home)
-    private void startHome(Context context) {
-        Intent intent = new Intent(context, MainActivity.class);
-        context.startActivity(intent);
-    }
-
-    // Method to start the EventsActivity
-    private void startEvents(Context context) {
-        Intent intent = new Intent(context, EventsActivity.class);
-        context.startActivity(intent);
-    }
 
     // Method to start the EntertainmentActivity
     private void startEntertainmentActivity(Context context) {
         Intent intent = new Intent(context, EntertainmentActivity.class);
         context.startActivity(intent);
-    }
-
-    // Method to start the FAQsMenuActivity
-    private void startFAQActivity(Context context){
-        Intent intent = new Intent(context, FAQsMenuActivity.class);
-        context.startActivity(intent);
-    }
-
-    // Method to start the Lost and Found Activity
-    private void startLnFActivity(Context context){
-        Intent intent = new Intent(context, LostAndFoundActivity.class);
-        context.startActivity(intent);
-    }
-
-    // Method to start the Guidance Activity
-    private void startGuidanceActivity(Context context){
-        Intent intent = new Intent(context, GuidanceActivity.class);
-        context.startActivity(intent);
-    }
-
-    // Method to start the Feedback Activity
-    private void startFeedbackActivity(Context context){
-        Intent intent = new Intent(context, FeedbackActivity.class);
-        context.startActivity(intent);
-    }
-
-    // Method to finish the current activity and go back to the previous one
-    private void back() {
-        finish();
     }
 
     private String getCorrectAnswer(int questionNumber) {
